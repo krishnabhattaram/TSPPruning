@@ -1,4 +1,9 @@
-optlearn/optlearn_env/*
+# pip venv
+optlearn/optlearn_env/
+
+# TSPLIB instance data
+optlearn/tsplib-data/problems/*
+optlearn/tsplib-data/npy/*
 
 ### Everything after this line comes from the GitHub Python.gitignore
 # Byte-compiled / optimized / DLL files
