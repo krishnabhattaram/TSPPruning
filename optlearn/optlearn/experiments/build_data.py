@@ -26,7 +26,7 @@ def build_features(numpy_dir, problem_dir, features):
     print("Done! :D")
 
 
-if __name__ is not "__main__":
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--numpy_dir", nargs="?", required=True)
     parser.add_argument("-p", "--problem_dir", nargs="?", required=True)
