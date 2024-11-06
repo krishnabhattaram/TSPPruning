@@ -22,11 +22,12 @@ source optlearn_env/bin/activate
 ## Feature Extraction Demo
 1. Download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/).
 2. Extract the `.tsp` file and place it in `optlearn/tsplib-data/problems/`.
-3. Run the extraction demo:
+3. Choose desired features from the end of [features.py](/optlearn/optlearn/feature/features.py).
+4. Run the extraction demo:
 ```
 python3.8 extraction_demo.py
 ```
-4. After a few minutes, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
+5. After a few minutes, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
 
 ## iPython Notebook
 I tried running this flow in an iPython notebook (`extraction_demo.ipynb`) but ran into errors when trying to do the pip installs in the same way.
