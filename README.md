@@ -20,8 +20,9 @@ source optlearn_env/bin/activate
 # Scripts
 
 ## Feature Extraction Demo
-1. Download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/).
-2. Extract the `.tsp` file and place it in `optlearn/tsplib-data/problems/`.
+1. Add a problem instance (file with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
+	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
+	2. To use one of our special problem instances, copy it from `optlearn/tsplib-data/problems-special/`.
 3. Choose desired features from the end of [features.py](/optlearn/optlearn/feature/features.py).
 4. Run the extraction demo:
 ```
