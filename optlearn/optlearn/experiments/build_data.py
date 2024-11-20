@@ -4,7 +4,7 @@ import argparse
 from optlearn.data import data_utils
 
 
-def build_features(numpy_dir, problem_dir, features):
+def build_features(numpy_dir, problem_dir, features, draw=False):
     """ 
     Given a directory to write numpy files to and a directory from which to pick up
     problem instances, build the specified features and write them into separate npy
