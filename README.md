@@ -1,10 +1,13 @@
 # Setup
 Python 3.8.4-5 had documentation [released in July 2020](https://www.python.org/doc/versions/) so we used Python 3.8.
 
+**All commands must be run in the `optlearn` directory so modules can find the venv.**
+
+**If using VS Code, either open the workspace to `optlearn` to automatically set the interpreter path, or manually set the interpreter path to `./optlearn/optlearn_env/bin/python`.**
+
 ## First time using TSPPruning after download
 Install all pip requirements:
 ```
-cd optlearn
 python3.8 -m venv optlearn_env
 source optlearn_env/bin/activate
 pip3 install -r requirements.txt
@@ -13,7 +16,6 @@ pip3 install -r requirements.txt
 ## Second time and afterwards
 Just enter the first optlearn package and source the activate script:
 ```
-cd optlearn
 source optlearn_env/bin/activate
 ```
 

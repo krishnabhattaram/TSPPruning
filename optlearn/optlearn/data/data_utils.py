@@ -12,7 +12,7 @@ from optlearn.feature import feature_utils
 from optlearn.data import compute_solutions
 
 from sklearn.model_selection import train_test_split
-
+from optlearn.plotting import plot_graph
 
 def problem_pairs_from_fnames(problem_fnames, solution_fnames=None):
     """ Build the problem solution pairs for computing features """
@@ -235,11 +235,15 @@ class createTrainingFeatures(feature_utils.buildFeatures):
             self.build_directory("solutions")
         self._tracker["Directory Status"] = "Checked/Built"
                 
-    def feature_step(self, function_name, problem_fname, filename):
+    def feature_step(self, function_name, problem_fname, filename, plot=False):
         """ Build the given feature for the given problem """
 
         self.load_object(problem_fname)
         data = features.functions[function_name](self._graph)
+        if plot:
+            # TODO add support for graphs that already have coordinates
+            plot_graph(self._graph, weights=data)
+                
         if not self.check_file_with_overrides(filename):
             self.write_to_npy(filename, data)
 
