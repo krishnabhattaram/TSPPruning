@@ -1,12 +1,12 @@
 tsplib95==0.7.1
 joblib==0.15.1
-numpy==1.19.5
+numpy==1.24.4 # Latest supported version for Python 3.8
 networkx==2.4
 cython==0.29.20
 xpress>=8.11.0
 scikit-learn==0.24.1
 mip==1.9.3
-matplotlib==3.3.0
+matplotlib==3.7.5 # Latest supported version for Python 3.8
 torch==1.7.0
 pandas==1.1.2
 pyscipopt==5.2.1 # 3.0.1 was released Jul 5, 2020 but trying to install it causes a fatal error

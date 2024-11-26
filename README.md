@@ -111,11 +111,8 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
 	2. To use one of our special problem instances, copy it from `optlearn/tsplib-data/problems-special/`.
 3. Choose desired features from the [features list](#Features).
-4. Run the extraction demo:
-```
-python3.8 extraction_demo.py
-```
-5. After a few minutes, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
+4. Run the extraction demo in `extraction_demo.ipynb`.
+5. You'll get visualizations of the weights and features. Also, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
 
 ## Execution Flow
 1. `experiments.build_data.build_features()`
@@ -127,11 +124,6 @@ python3.8 extraction_demo.py
 						1. `self.load_object()` (sets `self._graph` to the Graph object for this problem)
 						2. `features.functions[function_name]()` (compute the feature function)
 						3. `self.write_to_npy()`
-
-## iPython Notebook
-I tried running this flow in an iPython notebook (`extraction_demo.ipynb`) but ran into errors when trying to do the pip installs in the same way.
-
-Theoretically, I can follow [this post](https://stackoverflow.com/a/64105223) to run everything using the existing optlearn_env.
 
 ## Feature Calculation
 Commenting out lines `264-265` causes the optlearn workflow to calculate strictly the features overgoing needless computation to solve the TSP problem instance. 
