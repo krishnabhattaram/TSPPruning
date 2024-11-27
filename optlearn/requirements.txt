@@ -10,3 +10,9 @@ pandas==2.2.3 # Latest as of 11/26/2024
 pyscipopt==5.2.1 # Latest as of 11/26/2024
 binpacking==1.5.2 # Latest as of 11/26/2024
 networkx==3.4.2 # Latest as of 11/26/2024
+
+# For tsplib95==0.7.1
+Click==8.1.7
+Deprecated==1.2.15
+tabulate==0.8.10
+wrapt==1.17.0
