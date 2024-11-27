@@ -1,13 +1,12 @@
-tsplib95==0.7.1
-joblib==0.15.1
-numpy==1.24.4 # Latest supported version for Python 3.8
-networkx==2.4
-cython==0.29.20
-xpress>=8.11.0
-scikit-learn==0.24.1
-mip==1.9.3
-matplotlib==3.7.5 # Latest supported version for Python 3.8
-torch==1.7.0
-pandas==1.1.2
-pyscipopt==5.2.1 # 3.0.1 was released Jul 5, 2020 but trying to install it causes a fatal error
-binpacking==1.4.2 # released Jul 1, 2020
+joblib==1.4.2 # Latest as of 11/26/2024
+numpy==1.26.4 # Latest supported by xpress 9.5.0
+cython==3.0.11 # Latest as of 11/26/2024
+xpress==9.5.0 # Latest as of 11/26/2024
+scikit-learn==1.5.2 # Latest as of 11/26/2024
+mip==1.15.0 # Latest as of 11/26/2024
+matplotlib==3.9.2 # Latest as of 11/26/2024
+torch==2.5.1 # Latest as of 11/26/2024
+pandas==2.2.3 # Latest as of 11/26/2024
+pyscipopt==5.2.1 # Latest as of 11/26/2024
+binpacking==1.5.2 # Latest as of 11/26/2024
+networkx==3.4.2 # Latest as of 11/26/2024

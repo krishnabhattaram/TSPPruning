@@ -1,5 +1,5 @@
 # Setup
-Python 3.8.4-5 had documentation [released in July 2020](https://www.python.org/doc/versions/) so we used Python 3.8.
+We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
 **All commands must be run in the `optlearn` directory so modules can find the venv.**
 
@@ -8,13 +8,19 @@ Python 3.8.4-5 had documentation [released in July 2020](https://www.python.org/
 ## First time using TSPPruning after download
 Install all pip requirements:
 ```
-python3.8 -m venv optlearn_env
+python3.10 -m venv optlearn_env
 source optlearn_env/bin/activate
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
+tsplib95's last release was in 2020, so it relies on a very old networkx version that doesn't have all the visualization features we use. Install it separately so it doesn't conflict with our networkx:
+```
+pip install --no-deps tsplib95==0.7.1
+```
+It may display an error but should still work.
+
 ## Second time and afterwards
-Just enter the first optlearn package and source the activate script:
+If using VS Code, just select the venv. From the CLI, enter the first optlearn package and source the activate script:
 ```
 source optlearn_env/bin/activate
 ```
