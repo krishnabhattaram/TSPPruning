@@ -39,15 +39,16 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
             <th>Name</th>
             <th>Papers</th>
             <th>Description</th>
+			<th>Restrctions</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>f1_edges</td><td></td><td></td></tr>
-		<tr><td>f2_edges</td><td></td><td></td></tr>
-		<tr><td>f3_edges</td><td></td><td></td></tr>
-		<tr><td>f4_edges</td><td></td><td></td></tr>
-		<tr><td>f5_edges</td><td></td><td></td></tr>
-		<tr><td>f6_edges</td><td></td><td></td></tr>
+        <tr><td>f1_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f2_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f3_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f4_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f5_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f6_edges</td><td></td><td></td><td></td></tr>
 		<tr>
             <td>f7_edges</td>
 			<td>Wang and Remmel 2018</td>
@@ -59,14 +60,14 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 			<td>Fitzpatrick 3.2 (MODIFIED FROM THE ORIGINAL PAPER - SEE fg_edges)</td>
 			<td>Indicator features 1 or 0 from MWST</td>
 		</tr>
-		<tr><td>f10_edges</td><td></td><td></td></tr>
-		<tr><td>f11_edges</td><td></td><td></td></tr>
-		<tr><td>f12_edges</td><td></td><td></td></tr>
-		<tr><td>f13_edges</td><td></td><td></td></tr>
-		<tr><td>f1_vertices</td><td></td><td></td></tr>
-		<tr><td>f2_vertices</td><td></td><td></td></tr>
-		<tr><td>f3_vertices</td><td></td><td></td></tr>
-		<tr><td>f4_vertices</td><td></td><td></td></tr>
+		<tr><td>f10_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f11_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f12_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f13_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f1_vertices</td><td></td><td></td><td></td></tr>
+		<tr><td>f2_vertices</td><td></td><td></td><td></td></tr>
+		<tr><td>f3_vertices</td><td></td><td></td><td></td></tr>
+		<tr><td>f4_vertices</td><td></td><td></td><td></td></tr>
 		<tr>
             <td>fa_edges</td>
 			<td rowspan=6>Fitzpatrick 3.3 eqns (7)-(12), originally from Sun</td>
@@ -99,7 +100,12 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 			<td>Fitzpatrick 3.2</td>
 			<td>Continuous features corresponding to 0 or the MST iteration at which this edge was removed</td>
 		</tr>
-		<tr><td>fh_edges</td><td></td><td></td></tr>
+		<tr>
+			<td>fh_edges</td>
+			<td></td>
+			<td></td>
+			<td rowspan=6>None</td>
+		</tr>
 		<tr>
 			<td>fi_edges</td>
 			<td rowspan=2>Fitzpatrick 3.1</td>
@@ -115,12 +121,21 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
     </tbody>
 </table>
 
+# Special TSP instances
+We've included some handpicked special problem instances as specific examples in `optlearn/tsplib-data/problems-special/`:
+
+| Problem name | Vertices | Directed? | Description |
+|---|---|---|---|
+|small4_undirected|4|No|A simple directed graph whose edge weights are all distinct integers
+|small4_directed|4|Yes|small4_undirected but with each undirected edge split into 2 same-weight directed edges|
+|ulysses16|16|No|The symmetric TSP instance from TSPLIB95 with smallest n that also had an optimal tour available on the website|
+
 # Scripts
 
 ## Feature Extraction Demo
 1. Add a problem instance (file with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
 	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
-	2. To use one of our special problem instances, copy it from `optlearn/tsplib-data/problems-special/`.
+	2. 
 3. Choose desired features from the [features list](#Features).
 4. Run the extraction demo in `extraction_demo.ipynb`.
 5. You'll get visualizations of the weights and features. Also, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
