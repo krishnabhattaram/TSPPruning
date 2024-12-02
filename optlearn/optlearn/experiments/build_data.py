@@ -11,8 +11,8 @@ def build_features(numpy_dir, problem_dir, features, override=False):
     files for feature for eahc problem instance.
     """
 
-    problem_names = os.listdir(problem_dir)
-    problems = [os.path.join(problem_dir, problem) for problem in problem_names]
+    problems = os.listdir(problem_dir)
+    problems = [os.path.join(problem_dir, problem) for problem in problems]
     solutions = [None] * len(problems)
     file_pairs = list(zip(problems, solutions))
 

@@ -42,6 +42,7 @@ We've included some handpicked special problem instances as specific examples in
 |small4_undirected|4|No|A small undirected metric graph whose edge weights are all distinct integers|
 |small4_directed|4|Yes|small4_undirected but with each undirected edge split into 2 same-weight directed edges|
 |ulysses16|16|No|The symmetric TSP instance from TSPLIB95 with smallest n that also had an optimal tour available on the website|
+|small_tsp_instance|4|Yes|A small example graph we made with distinct integer weights (note: not metric since it breaks the triangle inequality)|
 
 # Features
 The list of all implemented features is in the end of [features.py](/optlearn/optlearn/feature/features.py).
@@ -153,6 +154,3 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 						1. `self.load_object()` (sets `self._graph` to the Graph object for this problem)
 						2. `features.functions[function_name]()` (compute the feature function)
 						3. `self.write_to_npy()`
-
-## Feature Calculation
-Commenting out lines `264-265` causes the optlearn workflow to calculate strictly the features overgoing needless computation to solve the TSP problem instance. 
