@@ -3,6 +3,7 @@ optlearn/optlearn_env/
 
 # TSPLIB instance data
 optlearn/tsplib-data/problems/*
+optlearn/tsplib-data/solutions/*
 optlearn/tsplib-data/npy/*
 
 ### Everything after this line comes from the GitHub Python.gitignore

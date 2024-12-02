@@ -1,4 +1,4 @@
-NAME: small4_directed
+NAME: directed4
 TYPE: TSP
 DIMENSION: 4
 EDGE_WEIGHT_TYPE: EXPLICIT

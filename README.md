@@ -137,14 +137,18 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 
 # Scripts
 ## Feature Extraction Demo
-1. Add a problem instance (file with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
+1. Add problem instances (files with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
 	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
-	2. 
+	2. Copy one from `optlearn/tsplib-data/problems-special/`.
+2. If you want to build labels as well, and you want to use precomputed solutions to skip solving time, add solutions (files with extension `.opt.tour`) into `optlearn/tsplib-data/solutions` from one of these sources:
+	1. Similarly, you can download one from the same source as above. WARNING: Some of the tour files have all the indices in the `TOUR_SECTION` on the same line, which may cause an error. To fix this, place each index on a new line.
+	2. Copy one from `optlearn/tsplib-data/solutions-special/`.
 3. Choose desired features from the [features list](#Features).
 4. Run the extraction demo in `extraction_demo.ipynb`.
 5. You'll get visualizations of the weights and features. Also, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
 
 ## Execution Flow
+(To help devs debug)
 1. `experiments.build_data.build_features()`
 	1. `self.data_create()` (At this point, `self = data.data_utils.createTrainingFeatures`)
 		1. For each problem `name`:
