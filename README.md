@@ -6,6 +6,11 @@ We upgraded to Python 3.10 (End of support October 2026) and upgraded most of th
 **If using VS Code, either open the workspace to `optlearn` to automatically set the interpreter path, or manually set the interpreter path to `./optlearn/optlearn_env/bin/python`.**
 
 ## First time using TSPPruning after download
+Enter the top `optlearn` directory if you're not already in it:
+```
+cd optlearn
+```
+
 Install all pip requirements:
 ```
 python3.10 -m venv optlearn_env
