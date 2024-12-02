@@ -45,12 +45,12 @@ class createTrainingFeatures(feature_utils.buildFeatures):
                  parent_directory,
                  function_names,
                  problem_pairs,
-                 overrides=[],
+                 override=False,
                  verbose=False):
         self.parent_directory = parent_directory
         self.problem_pairs = problem_pairs
         self.function_names = function_names
-        self.overrides = overrides
+        self.override = override
         self.verbose = verbose
         self.initialise_checklist()
         self.initialise_problem_dict()
@@ -99,11 +99,6 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         self.problem_pairs = problem_pairs
         self.initialise_checklist()
         self.initialise_problem_dict()
-
-    def set_overrides(self, override_fnames):
-        """ Set the overrides for file creation, overwrite if they exist already """
-
-        self.overrides = override_fnames
 
     def load_object(self, problem_fname):
         """ Load the problem file and store it as a hidden attribute """
@@ -193,18 +188,12 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         """ Check if the features for the given problem already exist """
 
         return os.path.exists(filename)
-
-    def check_file_override(self, filename):
-        """ Check if there is an override on the given file """
-
-        return filename in self.overrides 
     
     def check_file_with_overrides(self, filename):
         """ Even if the features exists already, compute them if overridden """
 
         exists = self.check_file_exists(filename)
-        override = self.check_file_override(filename)
-        if exists and not override:
+        if exists and not self.override:
             return True
         else:
             return False

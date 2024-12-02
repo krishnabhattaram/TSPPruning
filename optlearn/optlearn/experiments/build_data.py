@@ -4,23 +4,28 @@ import argparse
 from optlearn.data import data_utils
 
 
-def build_features(numpy_dir, problem_dir, features):
+def build_features(numpy_dir, problem_dir, features, override=False):
     """ 
     Given a directory to write numpy files to and a directory from which to pick up
     problem instances, build the specified features and write them into separate npy
     files for feature for eahc problem instance.
     """
 
-    problems = os.listdir(problem_dir)
-    problems = [os.path.join(problem_dir, problem) for problem in problems]
+    problem_names = os.listdir(problem_dir)
+    problems = [os.path.join(problem_dir, problem) for problem in problem_names]
     solutions = [None] * len(problems)
     file_pairs = list(zip(problems, solutions))
 
     features = ["compute_{}_edges".format(item) for item in features]
 
 
-    builder = data_utils.createTrainingFeatures(numpy_dir, features,
-                                                file_pairs, verbose=True)
+    builder = data_utils.createTrainingFeatures(
+        numpy_dir,
+        features,
+        file_pairs,
+        override=override,
+        verbose=True
+    )
     builder.data_create()
 
     print("Done! :D")

@@ -30,6 +30,19 @@ If using VS Code, just select the venv. From the CLI, enter the first optlearn p
 source optlearn_env/bin/activate
 ```
 
+# Data
+## TSPLIB95 File Standard
+See the [standard](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp95.pdf) to understand the file formats.
+
+## Special TSP instances
+We've included some handpicked special problem instances as specific examples in `optlearn/tsplib-data/problems-special/`:
+
+| Problem name | Vertices | Directed? | Description |
+|---|---|---|---|
+|small4_undirected|4|No|A small undirected metric graph whose edge weights are all distinct integers|
+|small4_directed|4|Yes|small4_undirected but with each undirected edge split into 2 same-weight directed edges|
+|ulysses16|16|No|The symmetric TSP instance from TSPLIB95 with smallest n that also had an optimal tour available on the website|
+
 # Features
 The list of all implemented features is in the end of [features.py](/optlearn/optlearn/feature/features.py).
 
@@ -121,17 +134,7 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
     </tbody>
 </table>
 
-# Special TSP instances
-We've included some handpicked special problem instances as specific examples in `optlearn/tsplib-data/problems-special/`:
-
-| Problem name | Vertices | Directed? | Description |
-|---|---|---|---|
-|small4_undirected|4|No|A simple directed graph whose edge weights are all distinct integers
-|small4_directed|4|Yes|small4_undirected but with each undirected edge split into 2 same-weight directed edges|
-|ulysses16|16|No|The symmetric TSP instance from TSPLIB95 with smallest n that also had an optimal tour available on the website|
-
 # Scripts
-
 ## Feature Extraction Demo
 1. Add a problem instance (file with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
 	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
