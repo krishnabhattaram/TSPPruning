@@ -9,6 +9,7 @@ from optlearn import graph_utils
 from optlearn.fix import fix_utils
 from optlearn.mst import mst_utils
 
+use_paper_fg = False
 
 class edgeSparsifier():
 
@@ -301,7 +302,8 @@ class mstSparsifier(edgeSparsifier, mstConstructor):
         sparse_graph = self.copy_graph_blank(graph)
         edges = self.run_sparsify(graph, iterations=iterations, weight=weight)
         for num, edge_set in enumerate(edges):
-            weighted_edges = [edge + ((num + 1) / iterations, ) for edge in edge_set]
+            feature_weight = 1 / (num + 1) if use_paper_fg else (num + 1) / iterations
+            weighted_edges = [edge + (feature_weight, ) for edge in edge_set]
             sparse_graph.add_weighted_edges_from(weighted_edges)
         return graph_utils.get_weights(sparse_graph)
 
