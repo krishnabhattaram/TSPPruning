@@ -1,18 +1,19 @@
-joblib==1.4.2 # Latest as of 11/26/2024
+# All of these versions are the latest as of 11/26/2024 unless otherwise noted
+joblib==1.4.2
 numpy==1.26.4 # Latest supported by xpress 9.5.0
-cython==3.0.11 # Latest as of 11/26/2024
-xpress==9.5.0 # Latest as of 11/26/2024
-scikit-learn==1.5.2 # Latest as of 11/26/2024
-mip==1.15.0 # Latest as of 11/26/2024
-matplotlib==3.9.2 # Latest as of 11/26/2024
-torch==2.5.1 # Latest as of 11/26/2024
-pandas==2.2.3 # Latest as of 11/26/2024
-pyscipopt==5.2.1 # Latest as of 11/26/2024
-binpacking==1.5.2 # Latest as of 11/26/2024
-networkx==3.4.2 # Latest as of 11/26/2024
+cython==3.0.11
+xpress==9.5.0
+scikit-learn==1.5.2
+mip==1.15.0
+matplotlib==3.9.2
+torch==2.5.1
+pandas==2.2.3
+pyscipopt==5.2.1
+binpacking==1.5.2
+networkx==3.4.2
 
-# For tsplib95==0.7.1
+# For tsplib95==0.7.1 (no longer updated after 2020)
 Click==8.1.7
 Deprecated==1.2.15
-tabulate==0.8.10
+tabulate==0.9.0
 wrapt==1.17.0
