@@ -1,0 +1,11 @@
+NAME : undirected4.opt.tour
+TYPE : TOUR
+DIMENSION : 4
+TOUR_SECTION
+1
+2
+3
+4
+-1
+EOF
+

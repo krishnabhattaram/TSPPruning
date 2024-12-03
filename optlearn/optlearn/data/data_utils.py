@@ -13,6 +13,7 @@ from optlearn.data import compute_solutions
 
 from sklearn.model_selection import train_test_split
 
+build_labels = True
 
 def problem_pairs_from_fnames(problem_fnames, solution_fnames=None):
     """ Build the problem solution pairs for computing features """
@@ -46,12 +47,12 @@ class createTrainingFeatures(feature_utils.buildFeatures):
                  parent_directory,
                  function_names,
                  problem_pairs,
-                 overrides=[],
+                 override=False,
                  verbose=False):
         self.parent_directory = parent_directory
         self.problem_pairs = problem_pairs
         self.function_names = function_names
-        self.overrides = overrides
+        self.override = override
         self.verbose = verbose
         self.initialise_checklist()
         self.initialise_problem_dict()
@@ -100,11 +101,6 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         self.problem_pairs = problem_pairs
         self.initialise_checklist()
         self.initialise_problem_dict()
-
-    def set_overrides(self, override_fnames):
-        """ Set the overrides for file creation, overwrite if they exist already """
-
-        self.overrides = override_fnames
 
     def load_object(self, problem_fname):
         """ Load the problem file and store it as a hidden attribute """
@@ -194,18 +190,12 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         """ Check if the features for the given problem already exist """
 
         return os.path.exists(filename)
-
-    def check_file_override(self, filename):
-        """ Check if there is an override on the given file """
-
-        return filename in self.overrides 
     
     def check_file_with_overrides(self, filename):
         """ Even if the features exists already, compute them if overridden """
 
         exists = self.check_file_exists(filename)
-        override = self.check_file_override(filename)
-        if exists and not override:
+        if exists and not self.override:
             return True
         else:
             return False
@@ -240,6 +230,7 @@ class createTrainingFeatures(feature_utils.buildFeatures):
 
         self.load_object(problem_fname)
         data = features.functions[function_name](self._graph)
+                
         if not self.check_file_with_overrides(filename):
             self.write_to_npy(filename, data)
 
@@ -261,8 +252,9 @@ class createTrainingFeatures(feature_utils.buildFeatures):
             filename = self.build_filename(function_name, namestem)
             self.feature_step(function_name, problem_fname, filename)
             self._check_dict[name]["problem"] = True
-        self.label_step(problem_fname, solution_fname, name)
-        self._check_dict[name]["solution"] = True
+        if build_labels:
+            self.label_step(problem_fname, solution_fname, name)
+            self._check_dict[name]["solution"] = True
             
     def data_create(self):
         """ Perform the data creation """
