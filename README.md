@@ -11,7 +11,7 @@ Enter the top `optlearn` directory if you're not already in it:
 cd optlearn
 ```
 
-Install all pip requirements:
+Install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
 ```
 python3.10 -m venv optlearn_env
 source optlearn_env/bin/activate
@@ -25,7 +25,7 @@ pip install --no-deps tsplib95==0.7.1
 It may display an error but should still work.
 
 ## Second time and afterwards
-If using VS Code, just select the venv. From the CLI, enter the first optlearn package and source the activate script:
+If using VS Code, just select the venv. From the CLI, enter the first optlearn package and activate the virtual environment:
 ```
 source optlearn_env/bin/activate
 ```
@@ -53,7 +53,7 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
             <th>Name</th>
             <th>Papers</th>
             <th>Description</th>
-			<th>Restrctions</th>
+			<th>Restrictions on Problems</th>
         </tr>
     </thead>
     <tbody>
@@ -67,12 +67,14 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
             <td>f7_edges</td>
 			<td>Wang and Remmel 2018</td>
 			<td>Fast estimated quadrilateral frequencies for each edge</td>
+			<td></td>
         </tr>
-		<tr><td>f8_edges</td><td></td><td></td></tr>
+		<tr><td>f8_edges</td><td></td><td></td><td></td></tr>
 		<tr>
 			<td>f9_edges</td>
 			<td>Fitzpatrick 3.2 (MODIFIED FROM THE ORIGINAL PAPER - SEE fg_edges)</td>
 			<td>Indicator features 1 or 0 from MWST</td>
+			<td>Undirected graphs only</td>
 		</tr>
 		<tr><td>f10_edges</td><td></td><td></td><td></td></tr>
 		<tr><td>f11_edges</td><td></td><td></td><td></td></tr>
@@ -86,6 +88,7 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
             <td>fa_edges</td>
 			<td rowspan=6>Fitzpatrick 3.3 eqns (7)-(12), originally from Sun</td>
 			<td>The comparison of the current edge weight to the global graph.</td>
+			<td rowspan=6>None</td>
         </tr>
 		<tr>
 			<td>fb_edges</td>
@@ -113,25 +116,27 @@ The list of all implemented features is in the end of [features.py](/optlearn/op
 			<td>fg_edges</td>
 			<td>Fitzpatrick 3.2</td>
 			<td>Continuous features corresponding to 0 or the MST iteration at which this edge was removed</td>
+			<td>Undirected graphs only</td>
 		</tr>
 		<tr>
 			<td>fh_edges</td>
 			<td></td>
 			<td></td>
-			<td rowspan=6>None</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>fi_edges</td>
 			<td rowspan=2>Fitzpatrick 3.1</td>
 			<td>r^ - Standardization of the reduced costs vector rk, calculated through subtour elimination constraints</td>
+			<td rowspan=2>None</td>
 		</tr>
 		<tr>
 			<td>fj_edges</td>
 			<td>r~ - Mean of all normalized reduced costs from k perturbed copies of the original LP relaxation after removing subtours</td>
 		</tr>
-		<tr><td>fk_edges</td><td></td><td></td></tr>
-		<tr><td>fp_edges</td><td></td><td></td></tr>
-		<tr><td>fm_edges</td><td></td><td></td></tr>
+		<tr><td>fk_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>fp_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>fm_edges</td><td></td><td></td><td></td></tr>
     </tbody>
 </table>
 
