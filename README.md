@@ -1,20 +1,10 @@
 # Setup
 We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
-**All commands must be run in the `optlearn` directory so modules can find the venv.**
-
-**If using VS Code, either open the workspace to `optlearn` to automatically set the interpreter path, or manually set the interpreter path to `./optlearn/optlearn_env/bin/python`.**
-
-## First time using TSPPruning after download
-Enter the top `optlearn` directory if you're not already in it:
+Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
 ```
-cd optlearn
-```
-
-Install all pip requirements:
-```
-python3.10 -m venv optlearn_env
-source optlearn_env/bin/activate
+python3.10 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -23,12 +13,6 @@ tsplib95's last release was in 2020, so it relies on a very old networkx version
 pip install --no-deps tsplib95==0.7.1
 ```
 It may display an error but should still work.
-
-## Second time and afterwards
-If using VS Code, just select the venv. From the CLI, enter the first optlearn package and source the activate script:
-```
-source optlearn_env/bin/activate
-```
 
 # Data
 ## TSPLIB95 File Standard
