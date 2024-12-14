@@ -34,104 +34,114 @@ We've included some handpicked special problem instances as specific examples in
 |small_tsp_instance|4|Yes|A small example graph we made with distinct integer weights (note: not metric since it breaks the triangle inequality)|
 
 # Features
-The list of all implemented features is in the end of [features.py](/optlearn/feature/features.py).
+These tables organize the list of all features implemented by optlearn, which is in the end of [features.py](/optlearn/feature/features.py).
 
+## Edge
+These are the features that our workflow currently supports. They are implemented by optlearn as the function `compute_<Short Name>_edges` (ex. `f1` is implemented by `compute_f1_edges`.)
 <table>
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Short Name</th>
             <th>Papers</th>
             <th>Description</th>
-			<th>Restrctions</th>
+			<th>Restrictions</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>f1_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f2_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f3_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f4_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f5_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f6_edges</td><td></td><td></td><td></td></tr>
+        <tr><td>f1</td><td></td><td></td><td></td></tr>
+		<tr><td>f2</td><td></td><td></td><td></td></tr>
+		<tr><td>f3</td><td></td><td></td><td></td></tr>
+		<tr><td>f4</td><td></td><td></td><td></td></tr>
+		<tr><td>f5</td><td></td><td></td><td></td></tr>
+		<tr><td>f6</td><td></td><td></td><td></td></tr>
 		<tr>
-            <td>f7_edges</td>
+            <td>f7</td>
 			<td>Wang and Remmel 2018</td>
 			<td>Fast estimated quadrilateral frequencies for each edge</td>
+			<td></td>
         </tr>
-		<tr><td>f8_edges</td><td></td><td></td></tr>
+		<tr><td>f8</td><td></td><td></td><td></td></tr>
 		<tr>
-			<td>f9_edges</td>
+			<td>f9</td>
 			<td>Fitzpatrick 3.2 (MODIFIED FROM THE ORIGINAL PAPER - SEE fg_edges)</td>
 			<td>Indicator features 1 or 0 from MWST</td>
+			<td></td>
 		</tr>
-		<tr><td>f10_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f11_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f12_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f13_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f1_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f2_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f3_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f4_vertices</td><td></td><td></td><td></td></tr>
+		<tr><td>f10</td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>f11</td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>f12</td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>f13</td><td></td><td></td><td></td><td></td></tr>
 		<tr>
-            <td>fa_edges</td>
+            <td>fa</td>
 			<td rowspan=6>Fitzpatrick 3.3 eqns (7)-(12), originally from Sun</td>
 			<td>The comparison of the current edge weight to the global graph.</td>
+			<td rowspan=6>None</td>
         </tr>
 		<tr>
-			<td>fb_edges</td>
+			<td>fb</td>
 			<td>The comparison of the current edge weight to its max left neighbor.</td>
 		</tr>
 		</tr>
 		<tr>
-			<td>fc_edges</td>
+			<td>fc</td>
 			<td>The comparison of the current edge weight to its max right neightbor.</td>
 		</tr>
 		</tr>
 		<tr>
-			<td>fd_edges</td>
+			<td>fd</td>
 			<td>Comparison of the edge weight to the overall graph (divide by global max).</td>
 		</tr>
 		<tr>
-			<td>fe_edges</td>
+			<td>fe</td>
 			<td>Compare the edge weight to its minimum left neighbor</td>
 		</tr>
 		<tr>
-			<td>ff_edges</td>
+			<td>ff</td>
 			<td>Compare the edge weight to its minimum right neighbor</td>
 		</tr>
 		<tr>
-			<td>fg_edges</td>
+			<td>fg</td>
 			<td>Fitzpatrick 3.2</td>
 			<td>Continuous features corresponding to 0 or the MST iteration at which this edge was removed</td>
+			<td>Undirected graphs only</td>
 		</tr>
 		<tr>
-			<td>fh_edges</td>
+			<td>fh</td>
 			<td></td>
 			<td></td>
-			<td rowspan=6>None</td>
+			<td></td>
 		</tr>
 		<tr>
-			<td>fi_edges</td>
+			<td>fi</td>
 			<td rowspan=2>Fitzpatrick 3.1</td>
 			<td>r^ - Standardization of the reduced costs vector rk, calculated through subtour elimination constraints</td>
+			<td rowspan=2>None</td>
 		</tr>
 		<tr>
-			<td>fj_edges</td>
+			<td>fj</td>
 			<td>r~ - Mean of all normalized reduced costs from k perturbed copies of the original LP relaxation after removing subtours</td>
 		</tr>
-		<tr><td>fk_edges</td><td></td><td></td></tr>
-		<tr><td>fp_edges</td><td></td><td></td></tr>
-		<tr><td>fm_edges</td><td></td><td></td></tr>
+		<tr><td>fk</td><td></td><td></td><td></td></tr>
+		<tr><td>fp</td><td></td><td></td><td></td></tr>
+		<tr><td>fm</td><td></td><td></td><td></td></tr>
     </tbody>
 </table>
 
-## Execution Flow
-(To help devs debug)
-1. `experiments.build_data.build_features()`
-	1. `self.data_create()` (At this point, `self = data.data_utils.createTrainingFeatures`)
-		1. For each problem `name`:
-			1. `self.data_steps(name)` 
-				1. For each feature name `function_name`:
-					1. `self.feature_step()`
-						1. `self.load_object()` (sets `self._graph` to the Graph object for this problem)
-						2. `features.functions[function_name]()` (compute the feature function)
-						3. `self.write_to_npy()`
+## Vertex
+These are currently **not** supported by our workflow. They are implemented by optlearn as the function `compute_<Short Name>_vertices` (ex. `f1` is implemented by `compute_f1_vertices`.)
+<table>
+    <thead>
+        <tr>
+            <th>Short Name</th>
+            <th>Papers</th>
+            <th>Description</th>
+			<th>Restrictions</th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr><td>f1</td><td></td><td></td><td></td></tr>
+		<tr><td>f2</td><td></td><td></td><td></td></tr>
+		<tr><td>f3</td><td></td><td></td><td></td></tr>
+		<tr><td>f4</td><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
