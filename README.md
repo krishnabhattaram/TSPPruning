@@ -15,9 +15,15 @@ pip install --no-deps tsplib95==0.7.1
 It may display an error but should still work.
 
 # Workflow
+## Steps
 1. Generate a large number of random problems (TODO Jeffrey).
 2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
 3. Train a neural network using the training script (TODO Kismet).
+
+## Notes for iPython Notebook Steps
+If you modify any external Python modules (ex. in the optlearn library), to load the changes, you'll need to restart the kernel before the next run.
+
+All code blocks are dependencies of future blocks unless otherwise noted.
 
 # Data
 ## TSPLIB95 File Standard
