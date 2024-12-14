@@ -73,10 +73,10 @@ These are the features that our workflow currently supports. They are implemente
 			<td>Indicator features 1 or 0 from MWST</td>
 			<td></td>
 		</tr>
-		<tr><td>f10</td><td></td><td></td><td></td><td></td></tr>
-		<tr><td>f11</td><td></td><td></td><td></td><td></td></tr>
-		<tr><td>f12</td><td></td><td></td><td></td><td></td></tr>
-		<tr><td>f13</td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>f10</td><td></td><td></td><td></td></tr>
+		<tr><td>f11</td><td></td><td></td><td></td></tr>
+		<tr><td>f12</td><td></td><td></td><td></td></tr>
+		<tr><td>f13</td><td></td><td></td><td></td></tr>
 		<tr>
             <td>fa</td>
 			<td rowspan=6>Fitzpatrick 3.3 eqns (7)-(12), originally from Sun</td>
