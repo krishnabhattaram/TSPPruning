@@ -16,7 +16,7 @@ It may display an error but should still work.
 
 # Workflow
 ## Steps
-1. Generate a large number of random problems (TODO Jeffrey).
+1. Generate a large number of random problems using [generate_problems.ipynb](generate_problems.ipynb).
 2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
 3. Train a neural network using the training script (TODO Kismet).
 
@@ -40,7 +40,7 @@ We've included some handpicked special problem instances as specific examples in
 |small_tsp_instance|4|Yes|A small example graph we made with distinct integer weights (note: not metric since it breaks the triangle inequality)|
 
 # Features
-These tables organize the list of all features implemented by optlearn, which is in the end of [features.py](/optlearn/feature/features.py).
+These tables organize the list of all features implemented by optlearn, which is in the end of [features.py](optlearn/feature/features.py).
 
 ## Edge
 These are the features that our workflow currently supports. They are implemented by optlearn as the function `compute_<Short Name>_edges` (ex. `f1` is implemented by `compute_f1_edges`.)
