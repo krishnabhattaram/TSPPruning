@@ -10,6 +10,15 @@ PROBLEMS_PATH = os.path.join(DATA_PATH, PROBLEMS_DIR)
 SOLUTIONS_PATH = os.path.join(DATA_PATH, SOLUTIONS_DIR)
 NP_PATH = os.path.join(DATA_PATH, NP_DIR)
 
+def build_directories_if_needed():
+	print('Building data directories...')
+	for path in (PROBLEMS_PATH, SOLUTIONS_PATH, NP_PATH):
+		if os.path.exists(path):
+			print('Directory already exists:', path)
+		else:
+			os.mkdir(path)
+			print('Created directory:', path)
+
 DESIRED_EDGE_FEATURES = ['fa', 'fb', 'fc', 'fd', 'fe', 'ff', 'fg', 'fi', 'fj']
 
 import shutil
