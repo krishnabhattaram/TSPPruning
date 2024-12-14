@@ -16,7 +16,7 @@ It may display an error but should still work.
 
 # Workflow
 1. Generate a large number of random problems (TODO Jeffrey).
-2. Build the features and labels using [build_features_and_labels.ipynb](optlearn/build_features_and_labels.ipynb).
+2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
 3. Train a neural network using the training script (TODO Kismet).
 
 # Data
@@ -24,7 +24,7 @@ It may display an error but should still work.
 See the [standard](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp95.pdf) to understand the file formats.
 
 ## Special TSP instances
-We've included some handpicked special problem instances as specific examples in `optlearn/tsplib-data/problems-special/`:
+We've included some handpicked special problem instances as specific examples in `tsplib-data/problems-special/`:
 
 | Problem name | Vertices | Directed? | Description |
 |---|---|---|---|
@@ -34,7 +34,7 @@ We've included some handpicked special problem instances as specific examples in
 |small_tsp_instance|4|Yes|A small example graph we made with distinct integer weights (note: not metric since it breaks the triangle inequality)|
 
 # Features
-The list of all implemented features is in the end of [features.py](/optlearn/optlearn/feature/features.py).
+The list of all implemented features is in the end of [features.py](/optlearn/feature/features.py).
 
 <table>
     <thead>
