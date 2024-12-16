@@ -32,7 +32,7 @@ def get_x_y_lists(coord_dict, indices=None):
 
 
     if indices is None:
-        inidices = coord_dict.keys()
+        indices = coord_dict.keys()
     
     coords_x = [coord_dict[key][0] for key in indices]
     coords_y = [coord_dict[key][1] for key in indices]

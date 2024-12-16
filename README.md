@@ -1,20 +1,10 @@
 # Setup
 We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
-**All commands must be run in the `optlearn` directory so modules can find the venv.**
-
-**If using VS Code, either open the workspace to `optlearn` to automatically set the interpreter path, or manually set the interpreter path to `./optlearn/optlearn_env/bin/python`.**
-
-## First time using TSPPruning after download
-Enter the top `optlearn` directory if you're not already in it:
+Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
 ```
-cd optlearn
-```
-
-Install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
-```
-python3.10 -m venv optlearn_env
-source optlearn_env/bin/activate
+python3.10 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -24,18 +14,23 @@ pip install --no-deps tsplib95==0.7.1
 ```
 It may display an error but should still work.
 
-## Second time and afterwards
-If using VS Code, just select the venv. From the CLI, enter the first optlearn package and activate the virtual environment:
-```
-source optlearn_env/bin/activate
-```
+# Workflow
+## Steps
+1. Generate a large number of random problems using [generate_problems.ipynb](generate_problems.ipynb).
+2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
+3. Train a neural network using the training script (TODO Kismet).
+
+## Notes for iPython Notebook Steps
+If you modify any external Python modules (ex. in the optlearn library), to load the changes, you'll need to restart the kernel before the next run.
+
+All code blocks are dependencies of future blocks unless otherwise noted.
 
 # Data
 ## TSPLIB95 File Standard
 See the [standard](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp95.pdf) to understand the file formats.
 
 ## Special TSP instances
-We've included some handpicked special problem instances as specific examples in `optlearn/tsplib-data/problems-special/`:
+We've included some handpicked special problem instances as specific examples in `tsplib-data/problems-special/`:
 
 | Problem name | Vertices | Directed? | Description |
 |---|---|---|---|
@@ -45,121 +40,114 @@ We've included some handpicked special problem instances as specific examples in
 |small_tsp_instance|4|Yes|A small example graph we made with distinct integer weights (note: not metric since it breaks the triangle inequality)|
 
 # Features
-The list of all implemented features is in the end of [features.py](/optlearn/optlearn/feature/features.py).
+These tables organize the list of all features implemented by optlearn, which is in the end of [features.py](optlearn/feature/features.py).
 
+## Edge
+These are the features that our workflow currently supports. They are implemented by optlearn as the function `compute_<Short Name>_edges` (ex. `f1` is implemented by `compute_f1_edges`.)
 <table>
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Short Name</th>
             <th>Papers</th>
             <th>Description</th>
-			<th>Restrictions on Problems</th>
+			<th>Restrictions</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td>f1_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f2_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f3_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f4_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f5_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f6_edges</td><td></td><td></td><td></td></tr>
+        <tr><td>f1</td><td></td><td></td><td></td></tr>
+		<tr><td>f2</td><td></td><td></td><td></td></tr>
+		<tr><td>f3</td><td></td><td></td><td></td></tr>
+		<tr><td>f4</td><td></td><td></td><td></td></tr>
+		<tr><td>f5</td><td></td><td></td><td></td></tr>
+		<tr><td>f6</td><td></td><td></td><td></td></tr>
 		<tr>
-            <td>f7_edges</td>
+            <td>f7</td>
 			<td>Wang and Remmel 2018</td>
 			<td>Fast estimated quadrilateral frequencies for each edge</td>
 			<td></td>
         </tr>
-		<tr><td>f8_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>f8</td><td></td><td></td><td></td></tr>
 		<tr>
-			<td>f9_edges</td>
+			<td>f9</td>
 			<td>Fitzpatrick 3.2 (MODIFIED FROM THE ORIGINAL PAPER - SEE fg_edges)</td>
 			<td>Indicator features 1 or 0 from MWST</td>
-			<td>Undirected graphs only</td>
+			<td></td>
 		</tr>
-		<tr><td>f10_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f11_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f12_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f13_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>f1_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f2_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f3_vertices</td><td></td><td></td><td></td></tr>
-		<tr><td>f4_vertices</td><td></td><td></td><td></td></tr>
+		<tr><td>f10</td><td></td><td></td><td></td></tr>
+		<tr><td>f11</td><td></td><td></td><td></td></tr>
+		<tr><td>f12</td><td></td><td></td><td></td></tr>
+		<tr><td>f13</td><td></td><td></td><td></td></tr>
 		<tr>
-            <td>fa_edges</td>
+            <td>fa</td>
 			<td rowspan=6>Fitzpatrick 3.3 eqns (7)-(12), originally from Sun</td>
 			<td>The comparison of the current edge weight to the global graph.</td>
 			<td rowspan=6>None</td>
         </tr>
 		<tr>
-			<td>fb_edges</td>
+			<td>fb</td>
 			<td>The comparison of the current edge weight to its max left neighbor.</td>
 		</tr>
 		</tr>
 		<tr>
-			<td>fc_edges</td>
+			<td>fc</td>
 			<td>The comparison of the current edge weight to its max right neightbor.</td>
 		</tr>
 		</tr>
 		<tr>
-			<td>fd_edges</td>
+			<td>fd</td>
 			<td>Comparison of the edge weight to the overall graph (divide by global max).</td>
 		</tr>
 		<tr>
-			<td>fe_edges</td>
+			<td>fe</td>
 			<td>Compare the edge weight to its minimum left neighbor</td>
 		</tr>
 		<tr>
-			<td>ff_edges</td>
+			<td>ff</td>
 			<td>Compare the edge weight to its minimum right neighbor</td>
 		</tr>
 		<tr>
-			<td>fg_edges</td>
+			<td>fg</td>
 			<td>Fitzpatrick 3.2</td>
 			<td>Continuous features corresponding to 0 or the MST iteration at which this edge was removed</td>
 			<td>Undirected graphs only</td>
 		</tr>
 		<tr>
-			<td>fh_edges</td>
+			<td>fh</td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td>fi_edges</td>
+			<td>fi</td>
 			<td rowspan=2>Fitzpatrick 3.1</td>
 			<td>r^ - Standardization of the reduced costs vector rk, calculated through subtour elimination constraints</td>
 			<td rowspan=2>None</td>
 		</tr>
 		<tr>
-			<td>fj_edges</td>
+			<td>fj</td>
 			<td>r~ - Mean of all normalized reduced costs from k perturbed copies of the original LP relaxation after removing subtours</td>
 		</tr>
-		<tr><td>fk_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>fp_edges</td><td></td><td></td><td></td></tr>
-		<tr><td>fm_edges</td><td></td><td></td><td></td></tr>
+		<tr><td>fk</td><td></td><td></td><td></td></tr>
+		<tr><td>fp</td><td></td><td></td><td></td></tr>
+		<tr><td>fm</td><td></td><td></td><td></td></tr>
     </tbody>
 </table>
 
-# Scripts
-## Feature Extraction Demo
-1. Add problem instances (files with extension `.tsp`) into `optlearn/tsplib-data/problems/` from one of these sources:
-	1. To get it from TSPLIB, download a problem instance (file with extension `.tsp.gz`) from [TSPLIB95's symmetric TSP list](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/). Then extract the `.tsp` file.
-	2. Copy one from `optlearn/tsplib-data/problems-special/`.
-2. If you want to build labels as well, and you want to use precomputed solutions to skip solving time, add solutions (files with extension `.opt.tour`) into `optlearn/tsplib-data/solutions` from one of these sources:
-	1. Similarly, you can download one from the same source as above. WARNING: Some of the tour files have all the indices in the `TOUR_SECTION` on the same line, which may cause an error. To fix this, place each index on a new line.
-	2. Copy one from `optlearn/tsplib-data/solutions-special/`.
-3. Choose desired features from the [features list](#Features).
-4. Run the extraction demo in `extraction_demo.ipynb`.
-5. You'll get visualizations of the weights and features. Also, the features and solutions should appear in `optlearn/tsplib-data/npy` in numpy format.
-
-## Execution Flow
-(To help devs debug)
-1. `experiments.build_data.build_features()`
-	1. `self.data_create()` (At this point, `self = data.data_utils.createTrainingFeatures`)
-		1. For each problem `name`:
-			1. `self.data_steps(name)` 
-				1. For each feature name `function_name`:
-					1. `self.feature_step()`
-						1. `self.load_object()` (sets `self._graph` to the Graph object for this problem)
-						2. `features.functions[function_name]()` (compute the feature function)
-						3. `self.write_to_npy()`
+## Vertex
+These are currently **not** supported by our workflow. They are implemented by optlearn as the function `compute_<Short Name>_vertices` (ex. `f1` is implemented by `compute_f1_vertices`.)
+<table>
+    <thead>
+        <tr>
+            <th>Short Name</th>
+            <th>Papers</th>
+            <th>Description</th>
+			<th>Restrictions</th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr><td>f1</td><td></td><td></td><td></td></tr>
+		<tr><td>f2</td><td></td><td></td><td></td></tr>
+		<tr><td>f3</td><td></td><td></td><td></td></tr>
+		<tr><td>f4</td><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
