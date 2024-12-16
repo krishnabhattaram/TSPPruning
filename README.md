@@ -18,7 +18,7 @@ It may display an error but should still work.
 ## Steps
 1. Generate a large number of random problems using [generate_problems.ipynb](generate_problems.ipynb).
 2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
-3. Train a neural network using the training script (TODO Kismet).
+3. Train a neural network (currently a LogReg model) using [optlearn_model_training.py](optlearn_model_training.py).
 
 ## Notes for iPython Notebook Steps
 If you modify any external Python modules (ex. in the optlearn library), to load the changes, you'll need to restart the kernel before the next run.
