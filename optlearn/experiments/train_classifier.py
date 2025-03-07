@@ -79,10 +79,10 @@ def setup_model(model, model_param_json_path=None):
 
     try:
         if "class_weight" in parameters:
-            parameters["class_weight"] = {key: float(value) for (key, value) in
-                                          parameters["class_weight"].items()}
-            for key in parameters["class_weight"].keys():
-                parameters["class_weight"][int(key)] = parameters["class_weight"].pop(key)
+            parameters["class_weight"] = {
+                int(key): float(value)
+                for (key, value) in parameters["class_weight"].items()
+            }
     except Exception as exception:
         print("Uknown error trying to decode the class weights!")
         raise exception        
@@ -225,7 +225,7 @@ def train_sparsifier(train_files_parent_path, model_name=None,
     print("Done! :D")
     
 
-if __name__ is not "__main__":
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--model_name", nargs="?", default=None)
     parser.add_argument("-p", "--model_param_json_path", nargs="?", default=None)

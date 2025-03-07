@@ -2,28 +2,33 @@ DATA_DIR = 'tsplib-data' # Relative to this file
 # These directories are all relative to DATA_DIR
 PROBLEMS_DIR = 'problems' # Input: problems
 SOLUTIONS_DIR = 'solutions' # Input: precomputed solutions
-NP_DIR = 'npy' # Output: features (and maybe labels)
+TRAINING_DIR = 'training' # Output: features (and maybe labels)
 
 import os
+JSONS_PATH = os.path.join(os.path.abspath(''), 'optlearn', 'experiments', 'jsons')
 DATA_PATH = os.path.join(os.path.abspath(''), DATA_DIR)
 PROBLEMS_PATH = os.path.join(DATA_PATH, PROBLEMS_DIR)
 SOLUTIONS_PATH = os.path.join(DATA_PATH, SOLUTIONS_DIR)
-NP_PATH = os.path.join(DATA_PATH, NP_DIR)
+TRAINING_PATH = os.path.join(DATA_PATH, TRAINING_DIR)
 
 def build_directories_if_needed():
 	print('Building data directories...')
-	for path in (PROBLEMS_PATH, SOLUTIONS_PATH, NP_PATH):
+	for path in (PROBLEMS_PATH, SOLUTIONS_PATH, TRAINING_PATH):
 		if os.path.exists(path):
 			print('Directory already exists:', path)
 		else:
 			os.mkdir(path)
 			print('Created directory:', path)
 
-DESIRED_EDGE_FEATURES = ['fa', 'fb', 'fc', 'fd', 'fe', 'ff', 'fg', 'fi', 'fj']
+import json
+TRAINING_PARAMS_JSON_PATH = os.path.join(JSONS_PATH, 'training_params.json')
+with open(TRAINING_PARAMS_JSON_PATH, "r") as json_file:
+	DESIRED_EDGE_FEATURES = json.load(json_file)
 
 import shutil
 def clear_directory(path):
 	if input(f'Clear directory {path}? (y/n) ').lower() != 'y':
+		print('Cancelled')
 		return
 	for filename in os.listdir(path):
 		file_path = os.path.join(path, filename)

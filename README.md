@@ -1,4 +1,11 @@
 # Setup
+## New setup
+Run the setup using `setup.py`:
+```
+pip3 install .
+```
+
+## Old setup
 We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
 Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
