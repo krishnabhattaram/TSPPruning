@@ -1,7 +1,8 @@
-# TSPLIB instance data
-tsplib-data/problems/*
-tsplib-data/solutions/*
-tsplib-data/npy/*
+# TSPLIB run data
+tsplib-data/problems/
+tsplib-data/solutions/
+tsplib-data/training/
+tsplib-data/*.pkl
 
 ## From https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General

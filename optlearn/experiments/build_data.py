@@ -9,7 +9,8 @@ def build_features(
     problem_dir,
     features,
     override=False,
-    solution_dir=None
+    solution_dir=None,
+    verbose=True
 ):
     """ 
     Given a directory to write numpy files to and a directory from which to pick up
@@ -37,7 +38,7 @@ def build_features(
         features,
         file_pairs,
         override=override,
-        verbose=True
+        verbose=verbose
     )
     builder.data_create()
 

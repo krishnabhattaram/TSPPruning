@@ -1,4 +1,11 @@
 # Setup
+## New setup
+Run the setup using `setup.py`:
+```
+pip3 install .
+```
+
+## Old setup
 We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
 Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
@@ -18,7 +25,7 @@ It may display an error but should still work.
 ## Steps
 1. Generate a large number of random problems using [generate_problems.ipynb](generate_problems.ipynb).
 2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
-3. Train a neural network using the training script (TODO Kismet).
+3. Train a neural network (currently a LogReg model) using [optlearn_model_training.py](optlearn_model_training.py).
 
 ## Notes for iPython Notebook Steps
 If you modify any external Python modules (ex. in the optlearn library), to load the changes, you'll need to restart the kernel before the next run.

@@ -13,6 +13,8 @@ from optlearn.data import compute_solutions
 
 from sklearn.model_selection import train_test_split
 
+import tqdm
+
 build_labels = True
 
 def problem_pairs_from_fnames(problem_fnames, solution_fnames=None):
@@ -265,9 +267,7 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         for num, name in enumerate(self._problem_dict.keys()):
             self._tracker["Current Problem"] = "{}".format(name)
             self.data_steps(name)
-            if self.verbose:
-                length = len(self._problem_dict.keys())
-                print("Problem {} of {} completed".format(num+1, length))
+            print(f'Solving {num} of {len(self._problem_dict.keys())}')
         self._tracker["Current Problem"] = "N/A"
         self._tracker["Features Status"] = "Checked/Built/Written"
         self.print_status(self.verbose)
