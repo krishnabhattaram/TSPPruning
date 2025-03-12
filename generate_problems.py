@@ -18,7 +18,7 @@ random.seed(SEED)
 def random_coord():
 	return round(random.random() * MAX_COORDINATE, DECIMAL_PRECISION)
 
-for i in tqdm.trange(N):
+for i in tqdm.trange(NUM_PROBLEMS):
 	name = f'random{i + 1}_{N}'
 	problem = tsplib95.models.StandardProblem(
 		name=name,
@@ -36,3 +36,5 @@ for i in tqdm.trange(N):
 	unterminated_problem = problem.__str__()[:-3]
 	with open(os.path.join(PROBLEMS_PATH, name + '.tsp'), 'w') as f:
 		f.write(unterminated_problem)
+
+print(f'Generated {NUM_PROBLEMS} problems')

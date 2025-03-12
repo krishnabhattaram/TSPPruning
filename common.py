@@ -23,17 +23,21 @@ def build_directories_if_needed():
 import json
 TRAINING_PARAMS_JSON_PATH = os.path.join(JSONS_PATH, 'training_params.json')
 with open(TRAINING_PARAMS_JSON_PATH, "r") as json_file:
-	DESIRED_EDGE_FEATURES = json.load(json_file)
+	DESIRED_EDGE_FEATURES = json.load(json_file)['feature_dirs']
 
 import shutil
+import sys
 def clear_directory(path):
-	if input(f'Clear directory {path}? (y/n) ').lower() != 'y':
-		print('Cancelled')
+	files = os.listdir(path)
+	if len(files) == 0:
 		return
-	for filename in os.listdir(path):
+	if input(f'The output directory {path} is nonempty. Would you like to clear it? (y/n) ').lower() != 'y':
+		print('Aborted')
+		sys.exit(-1)
+	for filename in files:
 		file_path = os.path.join(path, filename)
 		if os.path.isfile(file_path) or os.path.islink(file_path):
 			os.unlink(file_path)
 		elif os.path.isdir(file_path):
 			shutil.rmtree(file_path)
-	print('Cleared')
+	print('Cleared directory')
