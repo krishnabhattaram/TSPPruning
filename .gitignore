@@ -1,8 +1,5 @@
 # TSPLIB run data
-tsplib-data/problems/
-tsplib-data/solutions/
-tsplib-data/training/
-tsplib-data/*.pkl
+data/
 
 ## From https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General

@@ -1,24 +1,34 @@
-DATA_DIR = 'tsplib-data' # Relative to this file
-# These directories are all relative to DATA_DIR
-PROBLEMS_DIR = 'problems' # Input: problems
-SOLUTIONS_DIR = 'solutions' # Input: precomputed solutions
-TRAINING_DIR = 'training' # Output: features (and maybe labels)
-
 import os
 JSONS_PATH = os.path.join(os.path.abspath(''), 'optlearn', 'experiments', 'jsons')
-DATA_PATH = os.path.join(os.path.abspath(''), DATA_DIR)
-PROBLEMS_PATH = os.path.join(DATA_PATH, PROBLEMS_DIR)
-SOLUTIONS_PATH = os.path.join(DATA_PATH, SOLUTIONS_DIR)
-TRAINING_PATH = os.path.join(DATA_PATH, TRAINING_DIR)
+DATA_PATH = os.path.join(os.path.abspath(''), 'data') # ./data
+PROBLEMS_PATH = os.path.join(DATA_PATH, 'problems')
+GENERATED_PROBLEMS_PATH = os.path.join(PROBLEMS_PATH, 'generated')
+SOLUTIONS_PATH = os.path.join(DATA_PATH, 'solutions')
+TRAINING_PATH = os.path.join(DATA_PATH, 'training')
+MODELS_PATH = os.path.join(DATA_PATH, 'models')
 
-def build_directories_if_needed():
-	print('Building data directories...')
-	for path in (PROBLEMS_PATH, SOLUTIONS_PATH, TRAINING_PATH):
-		if os.path.exists(path):
-			print('Directory already exists:', path)
-		else:
-			os.mkdir(path)
-			print('Created directory:', path)
+def build_directory(path):
+	if os.path.exists(path):
+		return
+	os.mkdir(path)
+	print('Created directory:', path)
+
+def build_level_1_directories():
+	for path in (DATA_PATH, PROBLEMS_PATH, SOLUTIONS_PATH, TRAINING_PATH, MODELS_PATH):
+		build_directory(path)
+
+# Will exit the program if the directories are nonempty
+def build_level_2_directories():
+	OUTPUT_PATHS = (SOLUTIONS_PATH, TRAINING_PATH)
+	for level_1_dir in OUTPUT_PATHS:
+		clear_directory(level_1_dir)
+	for level_1_dir in OUTPUT_PATHS:
+		for problem_class in os.listdir(PROBLEMS_PATH):
+			build_directory(os.path.join(level_1_dir, problem_class))
+
+def build_generated_problems_directory():
+	build_level_1_directories()
+	build_directory(GENERATED_PROBLEMS_PATH)
 
 import json
 TRAINING_PARAMS_JSON_PATH = os.path.join(JSONS_PATH, 'training_params.json')

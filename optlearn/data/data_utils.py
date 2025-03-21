@@ -15,7 +15,17 @@ from sklearn.model_selection import train_test_split
 
 import tqdm
 
-build_labels = True
+# From https://stackoverflow.com/a/45669280
+import os, sys
+
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = open(os.devnull, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stdout = self._original_stdout
 
 def problem_pairs_from_fnames(problem_fnames, solution_fnames=None):
     """ Build the problem solution pairs for computing features """
@@ -42,20 +52,21 @@ def get_name_stem(name):
     """ Get the stem of a problem name (without file extension) """
 
     return name.split(".")[0]
-    
-    
+
 class createTrainingFeatures(feature_utils.buildFeatures):
     def __init__(self,
                  parent_directory,
                  function_names,
                  problem_pairs,
                  override=False,
-                 verbose=False):
+                 verbose=False,
+                 build_labels=True):
         self.parent_directory = parent_directory
         self.problem_pairs = problem_pairs
         self.function_names = function_names
         self.override = override
         self.verbose = verbose
+        self.build_labels = build_labels
         self.initialise_checklist()
         self.initialise_problem_dict()
         self.initialise_step_tracker()
@@ -248,13 +259,13 @@ class createTrainingFeatures(feature_utils.buildFeatures):
     def data_steps(self, name):
         """ Build all the features for the given problem """
 
+        problem_fname, solution_fname = self._problem_dict[name]
+        namestem = get_name_stem(name)
         for function_name in self.function_names:
-            problem_fname, solution_fname = self._problem_dict[name]
-            namestem = get_name_stem(name)
             filename = self.build_filename(function_name, namestem)
             self.feature_step(function_name, problem_fname, filename)
             self._check_dict[name]["problem"] = True
-        if build_labels:
+        if self.build_labels:
             self.label_step(problem_fname, solution_fname, name)
             self._check_dict[name]["solution"] = True
             

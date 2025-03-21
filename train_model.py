@@ -1,10 +1,11 @@
 from common import *
 import os
 from optlearn.experiments.train_classifier import train_sparsifier
+from datetime import datetime
 
 train_files_parent_path = TRAINING_PATH
 
-model_name = 'linear_svc'
+model_name = 'logreg'
 # Name of the model to use; must be one of the keys in the `models` dictionary 
 # (e.g., "logreg", "linear_svc", "svc", "knn", "ridge").
 
@@ -20,7 +21,11 @@ train_param_json_path = TRAINING_PARAMS_JSON_PATH
 # - train/test/validation split proportions
 # - sampling strategies.
 
-model_save_path = os.path.join(DATA_PATH, 'model.pkl')
+model_save_path = os.path.join(
+	DATA_PATH,
+	'models',
+	'model_' + datetime.today().strftime('%Y-%m-%d_%H-%M-%S') + '.pkl'
+)
 # Path where the trained model and its metadata will be saved after training.
 # This is optional; if not specified, the model won't be saved.
 

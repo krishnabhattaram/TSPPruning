@@ -392,6 +392,7 @@ class tspProblem():
             )
             event_handler = constraints.scip_event_handler(max_nodes=max_nodes)
             self.problem.includeEventhdlr(event_handler, "Event", "Event Handler")
+        # TODO optimizing here, remove print statements
         self.problem.optimize()
 
     def optimise_xpress(self, max_nodes=1e10, max_rounds=1e10):
