@@ -1,7 +1,6 @@
 from common import *
 import os
 from optlearn.experiments.train_classifier import train_sparsifier
-from datetime import datetime
 
 train_files_parent_path = TRAINING_PATH
 
@@ -24,7 +23,7 @@ train_param_json_path = TRAINING_PARAMS_JSON_PATH
 model_save_path = os.path.join(
 	DATA_PATH,
 	'models',
-	'model_' + datetime.today().strftime('%Y-%m-%d_%H-%M-%S') + '.pkl'
+	'model_' + datetime_filename() + '.pkl'
 )
 # Path where the trained model and its metadata will be saved after training.
 # This is optional; if not specified, the model won't be saved.

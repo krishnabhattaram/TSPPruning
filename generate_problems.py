@@ -1,7 +1,7 @@
 from common import *
 build_generated_problems_directory()
 
-NUM_PROBLEMS = 2
+NUM_PROBLEMS = 10
 N = 10 # number of vertices
 MAX_COORDINATE = 100.0 # All coordinates selected uniformly from [0, MAX_COORDINATE)
 SEED = 0
@@ -13,13 +13,13 @@ import os
 import tqdm
 random.seed(SEED)
 
-clear_directory(GENERATED_PROBLEMS_PATH)
+clear_directories([GENERATED_PROBLEMS_PATH])
 
 def random_coord():
 	return round(random.random() * MAX_COORDINATE, DECIMAL_PRECISION)
 
 for i in tqdm.trange(NUM_PROBLEMS):
-	name = f'random{i + 1}_{N}'
+	name = f'random{i + 1:06}_{N}'
 	problem = tsplib95.models.StandardProblem(
 		name=name,
 		type='TSP',

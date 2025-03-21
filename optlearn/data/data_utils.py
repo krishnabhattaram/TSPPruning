@@ -58,12 +58,14 @@ class createTrainingFeatures(feature_utils.buildFeatures):
                  parent_directory,
                  function_names,
                  problem_pairs,
+                 logger,
                  override=False,
                  verbose=False,
                  build_labels=True):
         self.parent_directory = parent_directory
-        self.problem_pairs = problem_pairs
         self.function_names = function_names
+        self.problem_pairs = problem_pairs
+        self.logger = logger
         self.override = override
         self.verbose = verbose
         self.build_labels = build_labels
@@ -276,6 +278,7 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         self.print_status(self.verbose)
         self._tracker["Features Status"] = "Checking/Building/Writing"
         for num, name in enumerate(self._problem_dict.keys()):
+            self.logger.info(f'\t({num + 1}/{len(self._problem_dict.keys())}) Solving {name}')
             self._tracker["Current Problem"] = "{}".format(name)
             self.data_steps(name)
             print(f'Solving {num} of {len(self._problem_dict.keys())}')

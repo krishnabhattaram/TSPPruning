@@ -8,10 +8,11 @@ def build_features(
     numpy_dir,
     problem_dir,
     features,
+    logger,
     override=False,
     solution_dir=None,
     verbose=True,
-    build_labels=True
+    build_labels=True,
 ):
     """ 
     Given a directory to write numpy files to and a directory from which to pick up
@@ -21,7 +22,7 @@ def build_features(
 
     problems, solutions = [], []
     solution_files = set(os.listdir(solution_dir) if solution_dir else [])
-    for problem_file in os.listdir(problem_dir):
+    for problem_file in sorted(os.listdir(problem_dir)):
         problems.append(os.path.join(problem_dir, problem_file))
         expected_solution_file = problem_file.replace('.tsp', '.opt.tour')
         if expected_solution_file in solution_files:
@@ -38,6 +39,7 @@ def build_features(
         numpy_dir,
         features,
         file_pairs,
+        logger,
         override=override,
         verbose=verbose,
         build_labels=build_labels

@@ -20,20 +20,27 @@ np.set_printoptions(linewidth=np.inf)
 
 from optlearn.experiments.build_data import build_features
 
-OUTPUT_PATHS = (SOLUTIONS_PATH, TRAINING_PATH)
-for level_1_dir in OUTPUT_PATHS:
-	clear_directory(level_1_dir)
-for problem_class in os.listdir(PROBLEMS_PATH):
-	problems_class_path = os.path.join(PROBLEMS_PATH, problem_class)
-	training_class_path = os.path.join(TRAINING_PATH, problem_class)
-	solutions_class_path = os.path.join(SOLUTIONS_PATH, problem_class)
-	build_directory(training_class_path)
-	build_directory(solutions_class_path)
-	build_features(
-		training_class_path,
-		problems_class_path,
-		DESIRED_EDGE_FEATURES,
-		solution_dir=solutions_class_path,
-		verbose=VERBOSE,
-		build_labels=BUILD_LABELS
-	)
+clear_directories([SOLUTIONS_PATH, TRAINING_PATH])
+
+log_path = os.path.join(LOGS_PATH, datetime_filename() + '.txt')
+with open(log_path, 'w') as f:
+	logger = setup_custom_logger(log_path, 'logger')
+	logger.info('Started training data computation')
+	problem_classes = os.listdir(PROBLEMS_PATH)
+	for i, problem_class in enumerate(problem_classes):
+		logger.info(f'({i + 1}/{len(problem_classes)}) Starting problem class {problem_class}')
+		problems_class_path = os.path.join(PROBLEMS_PATH, problem_class)
+		training_class_path = os.path.join(TRAINING_PATH, problem_class)
+		solutions_class_path = os.path.join(SOLUTIONS_PATH, problem_class)
+		build_directory(training_class_path)
+		build_directory(solutions_class_path)
+		build_features(
+			training_class_path,
+			problems_class_path,
+			DESIRED_EDGE_FEATURES,
+			logger,
+			solution_dir=solutions_class_path,
+			verbose=VERBOSE,
+			build_labels=BUILD_LABELS
+		)
+	logger.info('Done')
