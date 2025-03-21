@@ -7,7 +7,7 @@ from optlearn import plotting
 from optlearn.mip import mip_model
 
 
-def solve_problem(problem):
+def solve_problem(problem: mip_model.tspProblem):
     """ Get an optimal solution to the given problem """
 
     problem.optimise()

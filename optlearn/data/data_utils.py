@@ -13,20 +13,6 @@ from optlearn.data import compute_solutions
 
 from sklearn.model_selection import train_test_split
 
-import tqdm
-
-# From https://stackoverflow.com/a/45669280
-import os, sys
-
-class HiddenPrints:
-    def __enter__(self):
-        self._original_stdout = sys.stdout
-        sys.stdout = open(os.devnull, 'w')
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        sys.stdout.close()
-        sys.stdout = self._original_stdout
-
 def problem_pairs_from_fnames(problem_fnames, solution_fnames=None):
     """ Build the problem solution pairs for computing features """
 
