@@ -75,6 +75,6 @@ def setup_custom_logger(log_path, name):
     handler = logging.FileHandler(log_path, mode='w')
     handler.setFormatter(formatter)
     logger = logging.getLogger(name)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     logger.addHandler(handler)
     return logging.getLogger(name)
