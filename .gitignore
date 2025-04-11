@@ -1,5 +1,6 @@
-# TSPLIB run data
+# Added folders
 data/
+venv_tsp/
 
 ## From https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General

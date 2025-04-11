@@ -2,17 +2,16 @@ import os
 import argparse
 
 from optlearn.data import data_utils
+from common import *
 
+from multiprocessing import Process
 
-def build_features(
-    numpy_dir,
-    problem_dir,
-    features,
+def build_training_data_for_class(
+    problems_dir,
+    training_dir,
+    solutions_dir,
+    feature_names,
     logger,
-    override=False,
-    solution_dir=None,
-    verbose=True,
-    build_labels=True,
 ):
     """ 
     Given a directory to write numpy files to and a directory from which to pick up
@@ -20,39 +19,25 @@ def build_features(
     files for feature for eahc problem instance.
     """
 
-    problems, solutions = [], []
-    solution_files = set(os.listdir(solution_dir) if solution_dir else [])
-    for problem_file in sorted(os.listdir(problem_dir)):
-        problems.append(os.path.join(problem_dir, problem_file))
-        expected_solution_file = problem_file.replace('.tsp', '.opt.tour')
-        if expected_solution_file in solution_files:
-            solutions.append(os.path.join(solution_dir, expected_solution_file))
-        else:
-            solutions.append(None)
-        
-    file_pairs = list(zip(problems, solutions))
+    # Build feature/solution dirs
+    for feature_name in feature_names:
+        build_directory(os.path.join(training_dir, feature_name))
+    build_directory(os.path.join(training_dir, 'solutions'))
 
-    features = ["compute_{}_edges".format(item) for item in features]
-
-
-    builder = data_utils.createTrainingFeatures(
-        numpy_dir,
-        features,
-        file_pairs,
-        logger,
-        override=override,
-        verbose=verbose,
-        build_labels=build_labels
-    )
-    builder.data_create()
-
-    print("Done! :D")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--numpy_dir", nargs="?", required=True)
-    parser.add_argument("-p", "--problem_dir", nargs="?", required=True)
-    parser.add_argument("-f", "--features", nargs="+", required=True)
+    # Process individual problems
+    problem_filenames = sorted(os.listdir(problems_dir))
+    for i, problem_filename in enumerate(problem_filenames):
+        logger.info(f'\t({i + 1}/{len(problem_filenames)}) Starting {problem_filename}')
+        data_utils.build_training_data_for_problem(
+            problem_filename.split('.')[0],
+            problems_dir,
+            training_dir,
+            solutions_dir,
+            feature_names,
+            logger,
+        )
     
-    build_features(**vars(parser.parse_args()))
+    # self.data_steps(name)
+    # p = Process(target=self.data_steps, args=(name,))
+    # p.start()
+    # p.join()

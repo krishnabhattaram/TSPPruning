@@ -12,18 +12,17 @@ LOGS_PATH = os.path.join(DATA_PATH, 'logs')
 
 import shutil
 import sys
-def clear_directories(paths):
+def ask_to_clear_directories(paths):
     paths_to_clear = [path for path in paths if len(os.listdir(path)) > 0]
     if len(paths_to_clear) == 0:
         return
     
     if input('\n'.join([
-        'These output directories are nonempty and need to be cleared:',
+        "These output directories are nonempty. Would you like to clear them? If you don't clear them, existing output files will NOT be recomputed.",
         *paths_to_clear,
-        'Proceed? (y/n) '
+        '(y/n) '
     ])).lower() != 'y':
-        print('Aborted')
-        sys.exit(-1)
+        return
     for path in paths_to_clear:
         for filename in os.listdir(path):
             file_path = os.path.join(path, filename)
@@ -46,7 +45,7 @@ def build_level_1_directories():
 # Will exit the program if the directories are nonempty
 def build_level_2_directories():
     OUTPUT_PATHS = (SOLUTIONS_PATH, TRAINING_PATH)
-    clear_directories(OUTPUT_PATHS)
+    ask_to_clear_directories(OUTPUT_PATHS)
     for level_1_dir in OUTPUT_PATHS:
         for problem_class in os.listdir(PROBLEMS_PATH):
             build_directory(os.path.join(level_1_dir, problem_class))

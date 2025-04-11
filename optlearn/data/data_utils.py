@@ -2,7 +2,7 @@ import os
 import joblib
 
 import numpy as np
-import networkx as nx
+# import networkx as nx
 
 from optlearn import io_utils
 from optlearn import graph_utils
@@ -38,6 +38,43 @@ def get_name_stem(name):
     """ Get the stem of a problem name (without file extension) """
 
     return name.split(".")[0]
+
+def build_training_data_for_problem(
+    namestem,
+    problems_dir,
+    training_dir,
+    solutions_dir,
+    feature_names,
+    logger,
+):
+    problem_path = os.path.join(problems_dir, namestem + '.tsp')
+
+    object = io_utils.optObject()
+    object.read_problem_from_file(problem_path)
+    graph = object.get_graph()
+
+    # Features
+    for feature_name in feature_names:
+        feature_path = os.path.join(training_dir, feature_name, namestem + '.npy')
+        if os.path.exists(feature_path):
+            logger.info(f'\t\t Feature {feature_name}: skipping')
+        else:
+            logger.info(f'\t\t Feature {feature_name}: computing')
+            data = features.functions[f'compute_{feature_name}_edges'](graph)
+            np.save(feature_path, data)
+    
+    # Solution (npy)
+    solution_path = os.path.join(solutions_dir, namestem + '.opt.tour')
+    labels_path = os.path.join(training_dir, 'solutions', namestem + '.npy')
+    if os.path.exists(labels_path):
+        logger.info(f'\t\t Solution: skipping')
+    else:
+        logger.info(f'\t\t Solution: computing')
+        if os.path.exists(solution_path):
+            raise NotImplementedError("Creating solution npy from solution not implemented yet!")
+        else:
+            data = compute_solutions.get_all_optimal_tsp_solutions(graph)
+        np.save(labels_path, data)
 
 class createTrainingFeatures(feature_utils.buildFeatures):
     def __init__(self,
@@ -139,11 +176,6 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         vector[indices] = 1
         return vector
 
-    def write_to_npy(self, fname, data):
-        """ Write the data to the given filename """
-
-        np.save(fname, data)
-
     def check_parent_exists(self):
         """ Make sure the parent directory exists! """
 
@@ -187,20 +219,6 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         directory = os.path.join(self.parent_directory, dirname)
         return os.path.join(directory, name) + ".npy"
 
-    def check_file_exists(self, filename):
-        """ Check if the features for the given problem already exist """
-
-        return os.path.exists(filename)
-    
-    def check_file_with_overrides(self, filename):
-        """ Even if the features exists already, compute them if overridden """
-
-        exists = self.check_file_exists(filename)
-        if exists and not self.override:
-            return True
-        else:
-            return False
-
     def print_status(self, verbose=False):
         """ Print the step tracker nicely """
 
@@ -231,9 +249,9 @@ class createTrainingFeatures(feature_utils.buildFeatures):
 
         self.load_object(problem_fname)
         data = features.functions[function_name](self._graph)
-                
-        if not self.check_file_with_overrides(filename):
-            self.write_to_npy(filename, data)
+
+        if not os.path.exists(filename):
+            np.save(filename, data)
 
     def label_step(self, problem_fname, solution_fname, name):
         """ Build the given labels for the the given problem """
@@ -241,7 +259,7 @@ class createTrainingFeatures(feature_utils.buildFeatures):
         data = self.compute_labels(problem_fname, solution_fname)
         filename = os.path.join(self.parent_directory, "solutions")
         filename = os.path.join(filename, get_name_stem(name)) + ".npy"
-        if not self.check_file_with_overrides(filename):
+        if not os.path.exists(filename):
             self.write_to_npy(filename, data)
 
     def data_steps(self, name):
@@ -260,13 +278,17 @@ class createTrainingFeatures(feature_utils.buildFeatures):
     def data_create(self):
         """ Perform the data creation """
 
-        self.directory_step()
-        self.print_status(self.verbose)
-        self._tracker["Features Status"] = "Checking/Building/Writing"
+        # self.directory_step()
+        # self.print_status(self.verbose)
+        # self._tracker["Features Status"] = "Checking/Building/Writing"
         for num, name in enumerate(self._problem_dict.keys()):
             self.logger.info(f'\t({num + 1}/{len(self._problem_dict.keys())}) Solving {name}')
             self._tracker["Current Problem"] = "{}".format(name)
             self.data_steps(name)
+            p = Process(target=self.data_steps, args=(name,))
+            p.start()
+            p.join()
+            # self.data_steps(name)
             print(f'Solving {num} of {len(self._problem_dict.keys())}')
         self._tracker["Current Problem"] = "N/A"
         self._tracker["Features Status"] = "Checked/Built/Written"
