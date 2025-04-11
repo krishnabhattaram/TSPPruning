@@ -75,7 +75,6 @@ if __name__ == '__main__':
     logger = setup_custom_logger(log_path, 'logger')
     logger.info('Started training data computation')
     problem_classes = os.listdir(PROBLEMS_PATH)
-    processes = []
     for i, problem_class in enumerate(problem_classes):
         logger.info(f'({i + 1}/{len(problem_classes)}) Starting problem class {problem_class}')
         problems_class_path = os.path.join(PROBLEMS_PATH, problem_class)
@@ -104,8 +103,6 @@ if __name__ == '__main__':
                     logger,
                 )
             )
-            processes.append(p)
             p.start()
-    for p in processes:
-        p.join()
+            p.join()
     logger.info('Done')
