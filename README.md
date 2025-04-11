@@ -1,5 +1,5 @@
 # Setup
-## New setup
+## Installation
 Run the following commands:
 ```
 python3 -m venv venv_tsp
@@ -8,25 +8,24 @@ pip3 install .
 pip install --no-deps tsplib95==0.7.1
 ```
 
-## Old setup
+## Setup after Installation
+Reactivate the virtual environment:
+```
+source venv_tsp/bin/activate
+```
+
+## Notes
 We upgraded to Python 3.10 (End of support October 2026) and upgraded most of the pip packages to their most recent versions so we can develop with the newest features.
 
-Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html):
-```
-python3.10 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+Create a virtual environment and install all pip requirements in a virtual environment. If you're not on bash/zsh, replace the 2nd command with [the activation command for your platform/shell](https://docs.python.org/3.10/library/venv.html).
 
-tsplib95's last release was in 2020, so it relies on a very old networkx version that doesn't have all the visualization features we use. Install it separately so it doesn't conflict with our networkx:
-```
-pip install --no-deps tsplib95==0.7.1
-```
-It may display an error but should still work.
+tsplib95's last release was in 2020, so it relies on a very old networkx version that doesn't have all the visualization features we use. We need to install it separately so it doesn't conflict with our networkx. It may display an error but should still work.
 
 # Workflow
+## Note: These are outdated
+
 ## Steps
-1. Generate a large number of random problems using [generate_problems.ipynb](generate_problems.ipynb).
+1. Generate a large number of random problems using `generate_problems.py`.
 2. Build the features and labels using [build_features_and_labels.ipynb](build_features_and_labels.ipynb).
 3. Train a neural network (currently a LogReg model) using [optlearn_model_training.py](optlearn_model_training.py).
 
