@@ -97,6 +97,7 @@ if __name__ == '__main__':
         for feature_name in DESIRED_EDGE_FEATURES:
             build_directory(os.path.join(training_class_path, feature_name))
         build_directory(os.path.join(training_class_path, 'solutions'))
+        build_directory(os.path.join(training_class_path, 'sample_weights'))
 
         # Process individual problems
         problem_filenames = sorted(os.listdir(problems_class_path))
