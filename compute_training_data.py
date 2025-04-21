@@ -68,6 +68,16 @@ def build_training_data_for_problem(
         else:
             data = compute_solutions.get_all_optimal_tsp_solutions(graph)
         np.save(labels_path, data)
+    
+    # Sample weights
+    sample_weights_path = os.path.join(training_dir, 'sample_weights', namestem + '.npy')
+    if os.path.exists(sample_weights_path):
+        logger.info(f'\t\t Sample weights: skipping')
+    else:
+        logger.info(f'\t\t Sample weights: computing')
+        weights = np.array(graph_utils.get_weights(graph))
+        global_max = weights.max()
+        np.save(sample_weights_path, weights / global_max)
 
 if __name__ == '__main__':
     ask_to_clear_directories([SOLUTIONS_PATH, TRAINING_PATH])

@@ -116,6 +116,11 @@ class dataLoader():
         ratio = test / (test + val)
         self.test_pairs, self.val_pairs = train_test_split(self.test_pairs, train_size=ratio)
 
+    def train_test_split_matilda(self):
+        self.train_pairs, self.test_pairs = train_test_split(self.data_pairs, train_size=train)
+        ratio = test / (test + val)
+        self.test_pairs, self.val_pairs = train_test_split(self.test_pairs, train_size=ratio)
+
     def load_features(self, feature_fnames):
         """ Load the features """
 
@@ -126,6 +131,11 @@ class dataLoader():
         """ Load the labels """
 
         return io_utils.load_npy_file(label_fname)
+    
+    def load_weights(self, weight_fname):
+        """ Load the weights """
+
+        return io_utils.load_npy_file(weight_fname)
 
     def load_pair(self, pair):
         """ Load the feature-label pair """
@@ -176,4 +186,7 @@ class dataLoader():
             self.load_labels(pair[1]) for pair in self.val_pairs
         ]
 
-
+    def load_training_weights(self):
+        return [
+            self.load_training_weights(pair[0]) for pair in self.train_pairs
+        ]

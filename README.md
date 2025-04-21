@@ -22,6 +22,12 @@ Create a virtual environment and install all pip requirements in a virtual envir
 tsplib95's last release was in 2020, so it relies on a very old networkx version that doesn't have all the visualization features we use. We need to install it separately so it doesn't conflict with our networkx. It may display an error but should still work.
 
 # Workflow
+## Archiving Data
+You can archive the training data in `/data` with a command like this:
+```
+tar -zcvf training.tar.gz training/
+```
+
 ## Note: These are outdated
 
 ## Steps
