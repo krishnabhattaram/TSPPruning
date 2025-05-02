@@ -18,6 +18,7 @@ from optlearn.train import model_utils
 
 from optlearn.experiments.train_classifier import setup_training_params
 
+# Parameters
 # TODO: Add l1 regularization?
 # only if this accuracy isn't high enough
 model = SVC(
@@ -29,36 +30,33 @@ model = SVC(
     kernel='rbf',
     tol=0.001,
 )
-threshold = 0.5
-model_save_path = os.path.join(MODELS_PATH, f'model_{datetime_filename()}.pkl')
-
-dataLoader = DataLoader(
+THRESHOLD = 0.5
+MODEL_SAVE_PATH = os.path.join(MODELS_PATH, f'model_{datetime_filename()}.pkl')
+NAME_STEMS_PER_CLASS = (
 	{class_name: matilda_name_stems_range(1, 64) for class_name in MATILDA_HARD_CLASSES}
 )
 
-print(dataLoader.feature_path_tuples)
-print(dataLoader.solution_paths)
-print(dataLoader.sample_weight_paths)
-
+# Training
+dataLoader = DataLoader(NAME_STEMS_PER_CLASS)
 # train_loader = data_utils.dataLoader(train_tuples)
 # # train_loader.train_test_val_split(0.85, 0.10, 0.05)
 
-# sampler = RandomUnderSampler()
+sampler = RandomUnderSampler()
 
-# function_names = [f'compute_{feature}_edges' for feature in FEATURE_DIRS]
-# # Training
-# X_train = np.vstack(dataLoader.load_training_features())
-# y_train = np.concatenate(dataLoader.load_training_labels())
-# X_train, y_train = sampler.fit_resample(X_train, y_train)
-# sample_weights = np.concatenate(dataLoader.load_training_weights())
-# sample_weights, y_train = sampler.fit_resample(sample_weights, y_train)
+function_names = [f'compute_{feature}_edges' for feature in FEATURE_DIRS]
 
-# model.fit(X_train, y_train, sample_weights)
+X_train = np.vstack(dataLoader.load_features())
+y_train = np.concatenate(dataLoader.load_labels())
+X_train, y_train = sampler.fit_resample(X_train, y_train)
+sample_weights = np.concatenate(dataLoader.load_weights())
+sample_weights, y_train = sampler.fit_resample(sample_weights, y_train)
 
-# persister = model_utils.modelPersister(
-#     model=model,
-#     function_names=function_names,
-#     threshold=threshold
-# )
-# persister.save(model_save_path)
-# print(f"Model saved at {model_save_path}")
+model.fit(X_train, y_train, sample_weights)
+
+persister = model_utils.modelPersister(
+    model=model,
+    function_names=function_names,
+    threshold=THRESHOLD,
+)
+persister.save(MODEL_SAVE_PATH)
+print(f"Model saved at {MODEL_SAVE_PATH}")

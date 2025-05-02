@@ -3,7 +3,7 @@ import logging
 
 # Within each /data/npy/{class}/ directory
 FEATURE_DIRS = ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fi", "fj"]
-SOLUTION_DIR = 'solutions'
+LABEL_DIR = 'solutions'
 WEIGHT_DIR = 'sample_weights'
 
 DATA_PATH = os.path.join(os.path.abspath(''), 'data') # ./data
