@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # - weights
     # - train/test/validation split proportions
     # - sampling strategies.
-    parser.add_argument("-f", "--train_files_parent_path", nargs="?", default=TRAINING_PATH)
+    parser.add_argument("-f", "--train_files_parent_path", nargs="?", default=NPY_PATH)
 
     parser.add_argument("-s", "--model_save_path", nargs="?", default=os.path.join(DATA_PATH, 'model.pkl'))
     # Path where the trained model and its metadata will be saved after training.

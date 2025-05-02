@@ -1,14 +1,24 @@
 import os
 import logging
 
-JSONS_PATH = os.path.join(os.path.abspath(''), 'optlearn', 'experiments', 'jsons')
+# Within each /data/npy/{class}/ directory
+FEATURE_DIRS = ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fi", "fj"]
+SOLUTION_DIR = 'solutions'
+WEIGHT_DIR = 'sample_weights'
+
 DATA_PATH = os.path.join(os.path.abspath(''), 'data') # ./data
 PROBLEMS_PATH = os.path.join(DATA_PATH, 'problems')
 GENERATED_PROBLEMS_PATH = os.path.join(PROBLEMS_PATH, 'generated')
 SOLUTIONS_PATH = os.path.join(DATA_PATH, 'solutions')
-TRAINING_PATH = os.path.join(DATA_PATH, 'training')
+NPY_PATH = os.path.join(DATA_PATH, 'npy')
 MODELS_PATH = os.path.join(DATA_PATH, 'models')
 LOGS_PATH = os.path.join(DATA_PATH, 'logs')
+
+MATILDA_HARD_CLASSES = ['CLKhard', 'LKCChard']
+MATILDA_NON_HARD_CLASSES = ['CLKeasy', 'easyCLK-hardLKCC', 'hardCLK-easyLKCC', 'LKCCeasy', 'random']
+MATILDA_CLASSES = MATILDA_HARD_CLASSES + MATILDA_NON_HARD_CLASSES
+def matilda_name_stems_range(start, stop):
+    return [f'{i:03}' for i in range(start, stop)]
 
 import shutil
 import sys
@@ -39,12 +49,12 @@ def build_directory(path):
     print('Created directory:', path)
 
 def build_level_1_directories():
-    for path in (DATA_PATH, PROBLEMS_PATH, SOLUTIONS_PATH, TRAINING_PATH, MODELS_PATH, LOGS_PATH):
+    for path in (DATA_PATH, PROBLEMS_PATH, SOLUTIONS_PATH, NPY_PATH, MODELS_PATH, LOGS_PATH):
         build_directory(path)
 
 # Will exit the program if the directories are nonempty
 def build_level_2_directories():
-    OUTPUT_PATHS = (SOLUTIONS_PATH, TRAINING_PATH)
+    OUTPUT_PATHS = (SOLUTIONS_PATH, NPY_PATH)
     ask_to_clear_directories(OUTPUT_PATHS)
     for level_1_dir in OUTPUT_PATHS:
         for problem_class in os.listdir(PROBLEMS_PATH):
@@ -53,11 +63,6 @@ def build_level_2_directories():
 def build_generated_problems_directory():
     build_level_1_directories()
     build_directory(GENERATED_PROBLEMS_PATH)
-
-import json
-TRAINING_PARAMS_JSON_PATH = os.path.join(JSONS_PATH, 'training_params.json')
-with open(TRAINING_PARAMS_JSON_PATH, "r") as json_file:
-    DESIRED_EDGE_FEATURES = json.load(json_file)['feature_dirs']
 
 from datetime import datetime
 def datetime_filename():

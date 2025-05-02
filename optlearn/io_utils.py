@@ -29,12 +29,6 @@ def build_string(items):
     return empty[:-1].format(*items) + "\n"
 
 
-def load_npy_file(path):
-    """ Load a single npy file """
-
-    return np.load(path)
-
-
 def load_npz_data(path):
     """ Load a single npz training file """
     with np.load(path) as npz:

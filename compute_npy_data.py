@@ -4,8 +4,8 @@ build_level_1_directories()
 # Uses fg weights of 1/iteration (1-indexed) instead of iteration/k
 USE_PAPER_FG = True
 
-from optlearn.data.data_utils import dataLoader
-loader = dataLoader([])
+from optlearn.data.data_utils import DataLoader
+loader = DataLoader([])
 
 import optlearn.mst.mst_model
 optlearn.mst.mst_model.use_paper_fg = USE_PAPER_FG
@@ -80,21 +80,21 @@ def build_training_data_for_problem(
         np.save(sample_weights_path, weights / global_max)
 
 if __name__ == '__main__':
-    ask_to_clear_directories([SOLUTIONS_PATH, TRAINING_PATH])
+    ask_to_clear_directories([SOLUTIONS_PATH, NPY_PATH])
     log_path = os.path.join(LOGS_PATH, datetime_filename() + '.txt')
     logger = setup_custom_logger(log_path, 'logger')
-    logger.info('Started training data computation')
+    logger.info('Started npy data computation')
     problem_classes = os.listdir(PROBLEMS_PATH)
     for i, problem_class in enumerate(problem_classes):
         logger.info(f'({i + 1}/{len(problem_classes)}) Starting problem class {problem_class}')
         problems_class_path = os.path.join(PROBLEMS_PATH, problem_class)
-        training_class_path = os.path.join(TRAINING_PATH, problem_class)
+        training_class_path = os.path.join(NPY_PATH, problem_class)
         solutions_class_path = os.path.join(SOLUTIONS_PATH, problem_class)
         build_directory(training_class_path)
         build_directory(solutions_class_path)
         
         # Build feature/solution dirs
-        for feature_name in DESIRED_EDGE_FEATURES:
+        for feature_name in FEATURE_DIRS:
             build_directory(os.path.join(training_class_path, feature_name))
         build_directory(os.path.join(training_class_path, 'solutions'))
         build_directory(os.path.join(training_class_path, 'sample_weights'))
@@ -110,7 +110,7 @@ if __name__ == '__main__':
                     problems_class_path,
                     training_class_path,
                     solutions_class_path,
-                    DESIRED_EDGE_FEATURES,
+                    FEATURE_DIRS,
                     logger,
                 )
             )

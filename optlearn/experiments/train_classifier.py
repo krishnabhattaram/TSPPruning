@@ -161,7 +161,7 @@ def train_sparsifier(train_files_parent_path, model_name=None,
         )
         train_tuples = train_matcher.build_fname_triples()
 
-    train_loader = data_utils.dataLoader(train_tuples)
+    train_loader = data_utils.DataLoader(train_tuples)
     train_loader.train_test_val_split(0.85, 0.10, 0.05)
 
     if threshold is None:

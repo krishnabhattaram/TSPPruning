@@ -1,12 +1,5 @@
 import numpy as np
 
-
-def load_npy_file(path):
-    """ Load a single npy file """
-
-    return np.load(path)
-
-
 def load_npy_data(path):
     """ Load a single npy file (in a context manager) """
 
@@ -15,7 +8,7 @@ def load_npy_data(path):
 
 def load_npz_data(path):
     """ Load a single npz training file """
-    with load_npy_file(path) as npz:
+    with np.load(path) as npz:
         return npz["X"], npz["y"]
 
 

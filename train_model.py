@@ -2,7 +2,7 @@ from common import *
 import os
 from optlearn.experiments.train_classifier import train_sparsifier
 
-train_files_parent_path = TRAINING_PATH
+train_files_parent_path = NPY_PATH
 
 model_name = 'logreg'
 # Name of the model to use; must be one of the keys in the `models` dictionary 
