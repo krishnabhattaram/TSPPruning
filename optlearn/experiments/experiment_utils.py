@@ -11,9 +11,9 @@ from optlearn.train import model_utils
 def load_and_wrap_model(model_path):
     """ Load a trained model and wrap it to allow easy inference """
 
-    persister = model_utils.modelPersister()
+    persister = model_utils.ModelPersister()
     persister.load(model_path)
-    return model_utils.modelWrapper(model=persister.model,
+    return model_utils.ModelWrapper(model=persister.model,
                                     threshold=persister.threshold,
                                     function_names=persister.function_names) 
 

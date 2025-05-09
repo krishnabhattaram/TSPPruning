@@ -195,7 +195,7 @@ def train_sparsifier(train_files_parent_path, model_name=None,
     else:
         model.fit(X_train, y_train)
 
-    wrapper = model_utils.modelWrapper(model=model, function_names=function_names,
+    wrapper = model_utils.ModelWrapper(model=model, function_names=function_names,
                                        threshold=threshold)
 
     printer = pprint.PrettyPrinter(indent=4)
@@ -217,7 +217,7 @@ def train_sparsifier(train_files_parent_path, model_name=None,
     printer.pprint(metrics)
 
     if model_save_path is not None:            
-        persister = model_utils.modelPersister(model=model, function_names=function_names,
+        persister = model_utils.ModelPersister(model=model, function_names=function_names,
                                                threshold=threshold)
         persister.save(model_save_path)
         print("Model saved at {}".format(model_save_path))

@@ -9,7 +9,7 @@ from optlearn.fix import feasifiers
 from optlearn.fix import fix_model
 
 
-class modelPersister():
+class ModelPersister():
 
     def __init__(self, model=None, function_names=None, threshold=None):
         
@@ -110,7 +110,7 @@ class modelPersister():
         self.set_threshold(self._get_threshold(persist_dict))
         
         
-class modelWrapper(feature_utils.buildFeatures, modelPersister):
+class ModelWrapper(feature_utils.buildFeatures, ModelPersister):
 
     def __init__(self, model=None, function_names=None, threshold=None, feasifier=None):
 

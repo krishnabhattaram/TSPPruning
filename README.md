@@ -21,6 +21,9 @@ Create a virtual environment and install all pip requirements in a virtual envir
 
 tsplib95's last release was in 2020, so it relies on a very old networkx version that doesn't have all the visualization features we use. We need to install it separately so it doesn't conflict with our networkx. It may display an error but should still work.
 
+**For MATILDA:**
+For some reason, all classes have file names from `000.tsp` to `189.tsp`, except for CLKeasy and LKCCeasy, which have file names from `001.tsp` to `190.tsp`.
+
 # Workflow
 ## Archiving Data
 You can archive the training data in `/data` with a command like this:

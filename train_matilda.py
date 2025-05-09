@@ -1,8 +1,4 @@
 import os
-import json
-import pprint
-import pathlib
-import argparse
 
 from common import *
 
@@ -13,10 +9,7 @@ from imblearn.under_sampling import RandomUnderSampler
 from imblearn.over_sampling import RandomOverSampler
 
 from optlearn.data.data_utils import DataLoader
-from optlearn.train import train_utils
-from optlearn.train import model_utils
-
-from optlearn.experiments.train_classifier import setup_training_params
+from optlearn.train.model_utils import ModelPersister
 
 # Parameters
 # TODO: Add l1 regularization?
@@ -33,7 +26,7 @@ model = SVC(
 THRESHOLD = 0.5
 MODEL_SAVE_PATH = os.path.join(MODELS_PATH, f'model_{datetime_filename()}.pkl')
 NAME_STEMS_PER_CLASS = (
-	{class_name: matilda_name_stems_range(1, 64) for class_name in MATILDA_HARD_CLASSES}
+	{class_name: matilda_name_stems_range(0, 63) for class_name in MATILDA_HARD_CLASSES}
 )
 
 # Training
@@ -65,7 +58,7 @@ print('sample_weights:', sample_weights.shape)
 
 model.fit(X_train, y_train, sample_weights)
 
-persister = model_utils.modelPersister(
+persister = ModelPersister(
     model=model,
     function_names=function_names,
     threshold=THRESHOLD,

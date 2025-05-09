@@ -22,11 +22,6 @@ class DataLoader():
         self,
         name_stems_per_class: dict[str, list[str]]
     ):
-        # TODO add automatic name stems per class?
-        # if specific_name_stems is None:
-        #     some_fnames = self._get_fnames(self.feature_dirs[0])
-        #     self.name_stems = self._get_file_stems(some_fnames)
-
         self.feature_path_tuples = []
         self.label_paths = []
         self.sample_weight_paths = []
@@ -35,6 +30,9 @@ class DataLoader():
         for class_name, name_stems in name_stems_per_class.items():
             class_path = os.path.join(NPY_PATH, class_name)
             num_class_files = 0
+            # For empty name_stems lists, default to loading all name stems in the <class>/solutions directory
+            if name_stems == []:
+                name_stems = sorted([fname[:-4] for fname in os.listdir(os.path.join(class_path, LABEL_DIR))])
             for name_stem in name_stems:
                 file_name = name_stem + '.npy'
                 self.feature_path_tuples.append(tuple(

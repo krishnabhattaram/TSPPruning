@@ -21,7 +21,7 @@ from optlearn.data import compute_solutions
 
 from multiprocessing import Process
 
-def build_training_data_for_problem(
+def build_npy_data_for_problem(
     namestem,
     problems_dir,
     training_dir,
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         for i, problem_filename in enumerate(problem_filenames):
             logger.info(f'\t({i + 1}/{len(problem_filenames)}) Starting {problem_filename}')
             p = Process(
-                target=build_training_data_for_problem,
+                target=build_npy_data_for_problem,
                 args=(
                     problem_filename.split('.')[0],
                     problems_class_path,
