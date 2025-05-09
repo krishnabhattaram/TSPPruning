@@ -30,8 +30,11 @@ class DataLoader():
         self.feature_path_tuples = []
         self.label_paths = []
         self.sample_weight_paths = []
+        num_total_files = 0
+        print('Input files per class:')
         for class_name, name_stems in name_stems_per_class.items():
             class_path = os.path.join(NPY_PATH, class_name)
+            num_class_files = 0
             for name_stem in name_stems:
                 file_name = name_stem + '.npy'
                 self.feature_path_tuples.append(tuple(
@@ -40,6 +43,11 @@ class DataLoader():
                 ))
                 self.label_paths.append(os.path.join(class_path, LABEL_DIR, file_name))
                 self.sample_weight_paths.append(os.path.join(class_path, WEIGHT_DIR, file_name))
+                num_class_files += 1
+            print(f'{class_name}: {num_class_files}')
+            num_total_files += num_class_files
+        print('-')
+        print(f'TOTAL: {num_total_files}')
 
     # def train_test_val_split(self, train=0.7, test=0.15, val=0.15):
     #     """ Generate the train, test and validation sets """

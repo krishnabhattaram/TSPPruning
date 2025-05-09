@@ -2,7 +2,7 @@
 ## Installation
 Run the following commands:
 ```
-python3 -m venv venv_tsp
+python3.10 -m venv venv_tsp
 source venv_tsp/bin/activate
 pip3 install .
 pip install --no-deps tsplib95==0.7.1

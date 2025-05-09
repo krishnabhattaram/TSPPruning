@@ -47,9 +47,21 @@ function_names = [f'compute_{feature}_edges' for feature in FEATURE_DIRS]
 
 X_train = np.vstack(dataLoader.load_features())
 y_train = np.concatenate(dataLoader.load_labels())
+sample_weights = np.concatenate(dataLoader.load_weights()).reshape(-1, 1)
+
+print('Data shapes before resampling:')
+print('X_train:', X_train.shape)
+print('y_train:', y_train.shape)
+print('sample_weights:', sample_weights.shape)
+
 X_train, y_train = sampler.fit_resample(X_train, y_train)
-sample_weights = np.concatenate(dataLoader.load_weights())
 sample_weights, y_train = sampler.fit_resample(sample_weights, y_train)
+sample_weights = sample_weights.reshape(-1)
+
+print('Data shapes after resampling:')
+print('X_train:', X_train.shape)
+print('y_train:', y_train.shape)
+print('sample_weights:', sample_weights.shape)
 
 model.fit(X_train, y_train, sample_weights)
 
